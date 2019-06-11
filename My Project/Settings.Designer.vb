@@ -89,6 +89,42 @@ Namespace My
                 Me("LastWindowState") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property VMNames() As String
+            Get
+                Return CType(Me("VMNames"),String)
+            End Get
+            Set
+                Me("VMNames") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property VMPaths() As String
+            Get
+                Return CType(Me("VMPaths"),String)
+            End Get
+            Set
+                Me("VMPaths") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property VMIcons() As String
+            Get
+                Return CType(Me("VMIcons"),String)
+            End Get
+            Set
+                Me("VMIcons") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
