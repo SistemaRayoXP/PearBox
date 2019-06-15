@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="LastSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">640, 480</Value>
     </Setting>
     <Setting Name="LastLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">10, 10</Value>
     </Setting>
     <Setting Name="LastWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
-      <Value Profile="(Default)">Normal</Value>
+      <Value Profile="(Default)">Maximized</Value>
     </Setting>
     <Setting Name="VMNames" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -19,6 +19,12 @@
     </Setting>
     <Setting Name="VMIcons" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultNewMacPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RandomTitles" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

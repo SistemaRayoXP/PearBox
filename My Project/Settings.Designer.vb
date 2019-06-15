@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("640, 480")>  _
         Public Property LastSize() As Global.System.Drawing.Size
             Get
                 Return CType(Me("LastSize"),Global.System.Drawing.Size)
@@ -68,7 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10, 10")>  _
         Public Property LastLocation() As Global.System.Drawing.Point
             Get
                 Return CType(Me("LastLocation"),Global.System.Drawing.Point)
@@ -80,7 +80,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Normal")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Maximized")>  _
         Public Property LastWindowState() As Global.System.Windows.Forms.FormWindowState
             Get
                 Return CType(Me("LastWindowState"),Global.System.Windows.Forms.FormWindowState)
@@ -123,6 +123,30 @@ Namespace My
             End Get
             Set
                 Me("VMIcons") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property DefaultNewMacPath() As String
+            Get
+                Return CType(Me("DefaultNewMacPath"),String)
+            End Get
+            Set
+                Me("DefaultNewMacPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property RandomTitles() As Boolean
+            Get
+                Return CType(Me("RandomTitles"),Boolean)
+            End Get
+            Set
+                Me("RandomTitles") = value
             End Set
         End Property
     End Class

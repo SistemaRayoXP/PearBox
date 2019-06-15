@@ -61,6 +61,36 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property _144Blank() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_144Blank", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property _144Boot68K70() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_144Boot68K70", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property _144BootPPC85() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_144BootPPC85", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property Apple() As System.Drawing.Bitmap
@@ -137,6 +167,16 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("HardDisk", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icono).
+        '''</summary>
+        Friend ReadOnly Property JamieIcon() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("JamieIcon", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
         

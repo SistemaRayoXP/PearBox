@@ -55,10 +55,10 @@ Partial Class frmNew
         Me.Page1MemorySldr = New System.Windows.Forms.TrackBar()
         Me.Page1MemoryNumUD = New System.Windows.Forms.NumericUpDown()
         Me.Page1MemoryLabel = New System.Windows.Forms.Label()
+        Me.pansubWizardPic = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFile = New System.Windows.Forms.SaveFileDialog()
-        Me.pansubWizardPic = New System.Windows.Forms.Panel()
         Me.grpControls.SuspendLayout()
         Me.pansubPage0.SuspendLayout()
         Me.panPages.SuspendLayout()
@@ -200,9 +200,9 @@ Partial Class frmNew
         '
         'panPages
         '
+        Me.panPages.Controls.Add(Me.pansubPage2)
         Me.panPages.Controls.Add(Me.pansubPage0)
         Me.panPages.Controls.Add(Me.pansubPage1)
-        Me.panPages.Controls.Add(Me.pansubPage2)
         Me.panPages.Controls.Add(Me.pansubWizardPic)
         Me.panPages.Dock = System.Windows.Forms.DockStyle.Top
         Me.panPages.Location = New System.Drawing.Point(0, 0)
@@ -249,9 +249,10 @@ Partial Class frmNew
         '
         'Page2DiskLocTxt
         '
+        Me.Page2DiskLocTxt.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.Page2DiskLocTxt.Location = New System.Drawing.Point(32, 164)
         Me.Page2DiskLocTxt.Name = "Page2DiskLocTxt"
-        Me.Page2DiskLocTxt.Size = New System.Drawing.Size(210, 21)
+        Me.Page2DiskLocTxt.Size = New System.Drawing.Size(210, 14)
         Me.Page2DiskLocTxt.TabIndex = 6
         '
         'Page2DiskLocBrowseBtn
@@ -288,6 +289,7 @@ Partial Class frmNew
         'Page2NewRadio
         '
         Me.Page2NewRadio.AutoSize = True
+        Me.Page2NewRadio.Enabled = False
         Me.Page2NewRadio.Location = New System.Drawing.Point(32, 228)
         Me.Page2NewRadio.Name = "Page2NewRadio"
         Me.Page2NewRadio.Size = New System.Drawing.Size(173, 17)
@@ -383,14 +385,6 @@ Partial Class frmNew
         Me.Page1MemoryLabel.TabIndex = 5
         Me.Page1MemoryLabel.Text = "MB"
         '
-        'OpenFile
-        '
-        Me.OpenFile.Filter = "Disk Image File (*.dsk)|*.dsk|RAW disk file (*.img)|*.img|All files (*.*)|*.*"
-        '
-        'SaveFile
-        '
-        Me.SaveFile.FileName = "Disk Image File (*.dsk)|*.dsk|RAW disk file (*.img)|*.img|All files (*.*)|*.*"
-        '
         'pansubWizardPic
         '
         Me.pansubWizardPic.BackgroundImage = Global.PearBox.My.Resources.Resources.WizardImage
@@ -399,6 +393,14 @@ Partial Class frmNew
         Me.pansubWizardPic.Name = "pansubWizardPic"
         Me.pansubWizardPic.Size = New System.Drawing.Size(143, 302)
         Me.pansubWizardPic.TabIndex = 2
+        '
+        'OpenFile
+        '
+        Me.OpenFile.Filter = "Disk Image File (*.dsk)|*.dsk|RAW disk file (*.img)|*.img|All files (*.*)|*.*"
+        '
+        'SaveFile
+        '
+        Me.SaveFile.FileName = "Disk Image File (*.dsk)|*.dsk|RAW disk file (*.img)|*.img|All files (*.*)|*.*"
         '
         'frmNew
         '

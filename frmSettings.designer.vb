@@ -22,12 +22,18 @@ Partial Class frmSettings
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Name", 0, 0)
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Graphics", 1, 1)
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Disks", 2, 2)
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Network", 3, 3)
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Miscellaneous", 4, 4)
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Advanced", 5, 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSettings))
-        Me.CreateConfig = New System.Windows.Forms.Button()
+        Me.cmdOK = New System.Windows.Forms.Button()
         Me.SaveConfigFile = New System.Windows.Forms.SaveFileDialog()
         Me.StandardResolution = New System.Windows.Forms.ComboBox()
         Me.BitDepth = New System.Windows.Forms.ComboBox()
-        Me.WelcomeText = New System.Windows.Forms.Label()
         Me.Resolution = New System.Windows.Forms.Label()
         Me.CustomResolutionCheck = New System.Windows.Forms.CheckBox()
         Me.FullscreenCheck = New System.Windows.Forms.CheckBox()
@@ -37,15 +43,14 @@ Partial Class frmSettings
         Me.Browser = New System.Windows.Forms.OpenFileDialog()
         Me.ToggleFullscreenKeyLabel = New System.Windows.Forms.Label()
         Me.ToggleFullscreenKey = New System.Windows.Forms.TextBox()
-        Me.ShowAdvanced = New System.Windows.Forms.CheckBox()
         Me.Redraw = New System.Windows.Forms.Label()
         Me.RedrawTime = New System.Windows.Forms.TextBox()
-        Me.GraphicSettings = New System.Windows.Forms.GroupBox()
+        Me.GraphicSettings = New System.Windows.Forms.Panel()
         Me.BrowseDriver = New System.Windows.Forms.Button()
         Me.GraphicDriver = New System.Windows.Forms.TextBox()
         Me.GraphicDriverLabel = New System.Windows.Forms.Label()
         Me.Frequency = New System.Windows.Forms.NumericUpDown()
-        Me.DisksSettings = New System.Windows.Forms.GroupBox()
+        Me.DisksSettings = New System.Windows.Forms.Panel()
         Me.SlaveBrowseDrive = New System.Windows.Forms.Button()
         Me.SlaveTypeLabel = New System.Windows.Forms.Label()
         Me.SlaveImageLabel = New System.Windows.Forms.Label()
@@ -60,7 +65,7 @@ Partial Class frmSettings
         Me.MasterEnabled = New System.Windows.Forms.CheckBox()
         Me.MasterDriveType = New System.Windows.Forms.ComboBox()
         Me.SelectDrive = New System.Windows.Forms.FolderBrowserDialog()
-        Me.NetworkSettings = New System.Windows.Forms.GroupBox()
+        Me.NetworkSettings = New System.Windows.Forms.Panel()
         Me.Net8139MacLabel = New System.Windows.Forms.Label()
         Me.Net3c90MacLabel = New System.Windows.Forms.Label()
         Me.Mac68139 = New System.Windows.Forms.TextBox()
@@ -77,7 +82,7 @@ Partial Class frmSettings
         Me.Mac13c90 = New System.Windows.Forms.TextBox()
         Me.NetRTL8139 = New System.Windows.Forms.CheckBox()
         Me.Net3c90x = New System.Windows.Forms.CheckBox()
-        Me.MiscellaneousSettings = New System.Windows.Forms.GroupBox()
+        Me.MiscellaneousSettings = New System.Windows.Forms.Panel()
         Me.EnableSerialPort = New System.Windows.Forms.CheckBox()
         Me.ComposeDialogKeyLabel = New System.Windows.Forms.Label()
         Me.ComposeDialogKey = New System.Windows.Forms.TextBox()
@@ -92,7 +97,7 @@ Partial Class frmSettings
         Me.RAMLabel = New System.Windows.Forms.Label()
         Me.PPCG4 = New System.Windows.Forms.RadioButton()
         Me.PPCG3 = New System.Windows.Forms.RadioButton()
-        Me.AdvancedSettings = New System.Windows.Forms.GroupBox()
+        Me.AdvancedSettings = New System.Windows.Forms.Panel()
         Me.AdvancedWarning = New System.Windows.Forms.Label()
         Me.PageTable = New System.Windows.Forms.TextBox()
         Me.PageTableLabel = New System.Windows.Forms.Label()
@@ -110,6 +115,10 @@ Partial Class frmSettings
         Me.PROMFile = New System.Windows.Forms.TextBox()
         Me.PROMBootPathLabel = New System.Windows.Forms.Label()
         Me.PROMFileLabel = New System.Windows.Forms.Label()
+        Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.TreeView1 = New System.Windows.Forms.TreeView()
+        Me.NameSettings = New System.Windows.Forms.Panel()
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.GraphicSettings.SuspendLayout()
         CType(Me.Frequency, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DisksSettings.SuspendLayout()
@@ -118,16 +127,16 @@ Partial Class frmSettings
         Me.AdvancedSettings.SuspendLayout()
         Me.SuspendLayout()
         '
-        'CreateConfig
+        'cmdOK
         '
-        Me.CreateConfig.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CreateConfig.Location = New System.Drawing.Point(426, 445)
-        Me.CreateConfig.Margin = New System.Windows.Forms.Padding(2)
-        Me.CreateConfig.Name = "CreateConfig"
-        Me.CreateConfig.Size = New System.Drawing.Size(273, 30)
-        Me.CreateConfig.TabIndex = 0
-        Me.CreateConfig.Text = "Create config file"
-        Me.CreateConfig.UseVisualStyleBackColor = True
+        Me.cmdOK.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdOK.Location = New System.Drawing.Point(545, 382)
+        Me.cmdOK.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdOK.Name = "cmdOK"
+        Me.cmdOK.Size = New System.Drawing.Size(75, 23)
+        Me.cmdOK.TabIndex = 0
+        Me.cmdOK.Text = "OK"
+        Me.cmdOK.UseVisualStyleBackColor = True
         '
         'SaveConfigFile
         '
@@ -159,18 +168,6 @@ Partial Class frmSettings
         Me.BitDepth.Name = "BitDepth"
         Me.BitDepth.Size = New System.Drawing.Size(35, 21)
         Me.BitDepth.TabIndex = 3
-        '
-        'WelcomeText
-        '
-        Me.WelcomeText.Dock = System.Windows.Forms.DockStyle.Top
-        Me.WelcomeText.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WelcomeText.Location = New System.Drawing.Point(0, 0)
-        Me.WelcomeText.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.WelcomeText.Name = "WelcomeText"
-        Me.WelcomeText.Padding = New System.Windows.Forms.Padding(9, 10, 9, 0)
-        Me.WelcomeText.Size = New System.Drawing.Size(710, 56)
-        Me.WelcomeText.TabIndex = 4
-        Me.WelcomeText.Text = resources.GetString("WelcomeText.Text")
         '
         'Resolution
         '
@@ -231,7 +228,6 @@ Partial Class frmSettings
         Me.XCustomResolution.Name = "XCustomResolution"
         Me.XCustomResolution.Size = New System.Drawing.Size(32, 21)
         Me.XCustomResolution.TabIndex = 9
-        Me.XCustomResolution.Visible = False
         '
         'YCustomResolution
         '
@@ -242,7 +238,6 @@ Partial Class frmSettings
         Me.YCustomResolution.Name = "YCustomResolution"
         Me.YCustomResolution.Size = New System.Drawing.Size(32, 21)
         Me.YCustomResolution.TabIndex = 10
-        Me.YCustomResolution.Visible = False
         '
         'Browser
         '
@@ -272,20 +267,6 @@ Partial Class frmSettings
         Me.ToggleFullscreenKey.Text = "F11"
         Me.ToggleFullscreenKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'ShowAdvanced
-        '
-        Me.ShowAdvanced.AutoSize = True
-        Me.ShowAdvanced.Dock = System.Windows.Forms.DockStyle.Top
-        Me.ShowAdvanced.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShowAdvanced.Location = New System.Drawing.Point(0, 56)
-        Me.ShowAdvanced.Margin = New System.Windows.Forms.Padding(2)
-        Me.ShowAdvanced.Name = "ShowAdvanced"
-        Me.ShowAdvanced.Padding = New System.Windows.Forms.Padding(10, 0, 0, 4)
-        Me.ShowAdvanced.Size = New System.Drawing.Size(710, 21)
-        Me.ShowAdvanced.TabIndex = 13
-        Me.ShowAdvanced.Text = "Show advanced options"
-        Me.ShowAdvanced.UseVisualStyleBackColor = True
-        '
         'Redraw
         '
         Me.Redraw.AutoSize = True
@@ -297,7 +278,6 @@ Partial Class frmSettings
         Me.Redraw.Size = New System.Drawing.Size(87, 13)
         Me.Redraw.TabIndex = 14
         Me.Redraw.Text = "Redraw interval:"
-        Me.Redraw.Visible = False
         '
         'RedrawTime
         '
@@ -310,10 +290,10 @@ Partial Class frmSettings
         Me.RedrawTime.TabIndex = 15
         Me.RedrawTime.TabStop = False
         Me.RedrawTime.Text = "40"
-        Me.RedrawTime.Visible = False
         '
         'GraphicSettings
         '
+        Me.GraphicSettings.BackColor = System.Drawing.SystemColors.Window
         Me.GraphicSettings.Controls.Add(Me.BrowseDriver)
         Me.GraphicSettings.Controls.Add(Me.GraphicDriver)
         Me.GraphicSettings.Controls.Add(Me.GraphicDriverLabel)
@@ -332,12 +312,11 @@ Partial Class frmSettings
         Me.GraphicSettings.Controls.Add(Me.YCustomResolution)
         Me.GraphicSettings.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GraphicSettings.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.GraphicSettings.Location = New System.Drawing.Point(0, 77)
+        Me.GraphicSettings.Location = New System.Drawing.Point(199, 12)
         Me.GraphicSettings.Margin = New System.Windows.Forms.Padding(2)
         Me.GraphicSettings.Name = "GraphicSettings"
-        Me.GraphicSettings.Size = New System.Drawing.Size(420, 100)
+        Me.GraphicSettings.Size = New System.Drawing.Size(500, 367)
         Me.GraphicSettings.TabIndex = 16
-        Me.GraphicSettings.TabStop = False
         Me.GraphicSettings.Text = "Graphics"
         '
         'BrowseDriver
@@ -352,7 +331,6 @@ Partial Class frmSettings
         Me.BrowseDriver.TabStop = False
         Me.BrowseDriver.Text = "..."
         Me.BrowseDriver.UseVisualStyleBackColor = True
-        Me.BrowseDriver.Visible = False
         '
         'GraphicDriver
         '
@@ -365,7 +343,6 @@ Partial Class frmSettings
         Me.GraphicDriver.TabIndex = 20
         Me.GraphicDriver.TabStop = False
         Me.GraphicDriver.Text = "video.x"
-        Me.GraphicDriver.Visible = False
         '
         'GraphicDriverLabel
         '
@@ -378,7 +355,6 @@ Partial Class frmSettings
         Me.GraphicDriverLabel.Size = New System.Drawing.Size(78, 13)
         Me.GraphicDriverLabel.TabIndex = 19
         Me.GraphicDriverLabel.Text = "Graphic driver:"
-        Me.GraphicDriverLabel.Visible = False
         '
         'Frequency
         '
@@ -396,6 +372,7 @@ Partial Class frmSettings
         '
         'DisksSettings
         '
+        Me.DisksSettings.BackColor = System.Drawing.SystemColors.Window
         Me.DisksSettings.Controls.Add(Me.SlaveBrowseDrive)
         Me.DisksSettings.Controls.Add(Me.SlaveTypeLabel)
         Me.DisksSettings.Controls.Add(Me.SlaveImageLabel)
@@ -411,11 +388,10 @@ Partial Class frmSettings
         Me.DisksSettings.Controls.Add(Me.MasterDriveType)
         Me.DisksSettings.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DisksSettings.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.DisksSettings.Location = New System.Drawing.Point(0, 177)
+        Me.DisksSettings.Location = New System.Drawing.Point(199, 12)
         Me.DisksSettings.Name = "DisksSettings"
-        Me.DisksSettings.Size = New System.Drawing.Size(420, 200)
+        Me.DisksSettings.Size = New System.Drawing.Size(500, 367)
         Me.DisksSettings.TabIndex = 17
-        Me.DisksSettings.TabStop = False
         Me.DisksSettings.Text = "Disks"
         '
         'SlaveBrowseDrive
@@ -565,7 +541,6 @@ Partial Class frmSettings
         Me.MasterDriveType.Size = New System.Drawing.Size(121, 21)
         Me.MasterDriveType.TabIndex = 19
         Me.MasterDriveType.TabStop = False
-        Me.MasterDriveType.Visible = False
         '
         'SelectDrive
         '
@@ -573,6 +548,7 @@ Partial Class frmSettings
         '
         'NetworkSettings
         '
+        Me.NetworkSettings.BackColor = System.Drawing.SystemColors.Window
         Me.NetworkSettings.Controls.Add(Me.Net8139MacLabel)
         Me.NetworkSettings.Controls.Add(Me.Net3c90MacLabel)
         Me.NetworkSettings.Controls.Add(Me.Mac68139)
@@ -591,11 +567,10 @@ Partial Class frmSettings
         Me.NetworkSettings.Controls.Add(Me.Net3c90x)
         Me.NetworkSettings.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.NetworkSettings.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.NetworkSettings.Location = New System.Drawing.Point(426, 77)
+        Me.NetworkSettings.Location = New System.Drawing.Point(199, 12)
         Me.NetworkSettings.Name = "NetworkSettings"
-        Me.NetworkSettings.Size = New System.Drawing.Size(273, 114)
+        Me.NetworkSettings.Size = New System.Drawing.Size(500, 367)
         Me.NetworkSettings.TabIndex = 19
-        Me.NetworkSettings.TabStop = False
         Me.NetworkSettings.Text = "Network"
         '
         'Net8139MacLabel
@@ -804,6 +779,7 @@ Partial Class frmSettings
         '
         'MiscellaneousSettings
         '
+        Me.MiscellaneousSettings.BackColor = System.Drawing.SystemColors.Window
         Me.MiscellaneousSettings.Controls.Add(Me.EnableSerialPort)
         Me.MiscellaneousSettings.Controls.Add(Me.ComposeDialogKeyLabel)
         Me.MiscellaneousSettings.Controls.Add(Me.ComposeDialogKey)
@@ -820,11 +796,10 @@ Partial Class frmSettings
         Me.MiscellaneousSettings.Controls.Add(Me.PPCG3)
         Me.MiscellaneousSettings.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MiscellaneousSettings.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.MiscellaneousSettings.Location = New System.Drawing.Point(3, 382)
+        Me.MiscellaneousSettings.Location = New System.Drawing.Point(199, 12)
         Me.MiscellaneousSettings.Name = "MiscellaneousSettings"
-        Me.MiscellaneousSettings.Size = New System.Drawing.Size(417, 93)
+        Me.MiscellaneousSettings.Size = New System.Drawing.Size(500, 367)
         Me.MiscellaneousSettings.TabIndex = 18
-        Me.MiscellaneousSettings.TabStop = False
         Me.MiscellaneousSettings.Text = "Miscellaneous Settings"
         '
         'EnableSerialPort
@@ -839,7 +814,6 @@ Partial Class frmSettings
         Me.EnableSerialPort.TabIndex = 28
         Me.EnableSerialPort.Text = "Enable serial port (Debug)"
         Me.EnableSerialPort.UseVisualStyleBackColor = False
-        Me.EnableSerialPort.Visible = False
         '
         'ComposeDialogKeyLabel
         '
@@ -851,7 +825,6 @@ Partial Class frmSettings
         Me.ComposeDialogKeyLabel.Size = New System.Drawing.Size(102, 13)
         Me.ComposeDialogKeyLabel.TabIndex = 27
         Me.ComposeDialogKeyLabel.Text = "Compose dialog key"
-        Me.ComposeDialogKeyLabel.Visible = False
         '
         'ComposeDialogKey
         '
@@ -861,7 +834,6 @@ Partial Class frmSettings
         Me.ComposeDialogKey.TabIndex = 26
         Me.ComposeDialogKey.Text = "Ctrl+F11"
         Me.ComposeDialogKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ComposeDialogKey.Visible = False
         '
         'ChangeCDKeyLabel
         '
@@ -987,6 +959,7 @@ Partial Class frmSettings
         '
         'AdvancedSettings
         '
+        Me.AdvancedSettings.BackColor = System.Drawing.SystemColors.Window
         Me.AdvancedSettings.Controls.Add(Me.AdvancedWarning)
         Me.AdvancedSettings.Controls.Add(Me.PageTable)
         Me.AdvancedSettings.Controls.Add(Me.PageTableLabel)
@@ -1006,13 +979,11 @@ Partial Class frmSettings
         Me.AdvancedSettings.Controls.Add(Me.PROMFileLabel)
         Me.AdvancedSettings.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AdvancedSettings.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.AdvancedSettings.Location = New System.Drawing.Point(426, 197)
+        Me.AdvancedSettings.Location = New System.Drawing.Point(199, 12)
         Me.AdvancedSettings.Name = "AdvancedSettings"
-        Me.AdvancedSettings.Size = New System.Drawing.Size(272, 243)
+        Me.AdvancedSettings.Size = New System.Drawing.Size(500, 367)
         Me.AdvancedSettings.TabIndex = 20
-        Me.AdvancedSettings.TabStop = False
         Me.AdvancedSettings.Text = "Advanced"
-        Me.AdvancedSettings.Visible = False
         '
         'AdvancedWarning
         '
@@ -1200,20 +1171,98 @@ Partial Class frmSettings
         Me.PROMFileLabel.TabIndex = 0
         Me.PROMFileLabel.Text = "PROM File:"
         '
+        'cmdCancel
+        '
+        Me.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.cmdCancel.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdCancel.Location = New System.Drawing.Point(624, 382)
+        Me.cmdCancel.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
+        Me.cmdCancel.TabIndex = 21
+        Me.cmdCancel.Text = "Cancel"
+        Me.cmdCancel.UseVisualStyleBackColor = True
+        '
+        'TreeView1
+        '
+        Me.TreeView1.FullRowSelect = True
+        Me.TreeView1.HideSelection = False
+        Me.TreeView1.ImageIndex = 0
+        Me.TreeView1.ImageList = Me.ImageList1
+        Me.TreeView1.Location = New System.Drawing.Point(12, 12)
+        Me.TreeView1.Name = "TreeView1"
+        TreeNode1.ImageIndex = 0
+        TreeNode1.Name = "Nodo0"
+        TreeNode1.SelectedImageIndex = 0
+        TreeNode1.Text = "Name"
+        TreeNode2.ImageIndex = 1
+        TreeNode2.Name = "Nodo1"
+        TreeNode2.SelectedImageIndex = 1
+        TreeNode2.Text = "Graphics"
+        TreeNode3.ImageIndex = 2
+        TreeNode3.Name = "Nodo2"
+        TreeNode3.SelectedImageIndex = 2
+        TreeNode3.Text = "Disks"
+        TreeNode4.ImageIndex = 3
+        TreeNode4.Name = "Nodo3"
+        TreeNode4.SelectedImageIndex = 3
+        TreeNode4.Text = "Network"
+        TreeNode5.ImageIndex = 4
+        TreeNode5.Name = "Nodo4"
+        TreeNode5.SelectedImageIndex = 4
+        TreeNode5.Text = "Miscellaneous"
+        TreeNode6.ImageIndex = 5
+        TreeNode6.Name = "Nodo5"
+        TreeNode6.SelectedImageIndex = 5
+        TreeNode6.Text = "Advanced"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        Me.TreeView1.SelectedImageIndex = 0
+        Me.TreeView1.ShowLines = False
+        Me.TreeView1.ShowPlusMinus = False
+        Me.TreeView1.ShowRootLines = False
+        Me.TreeView1.Size = New System.Drawing.Size(181, 392)
+        Me.TreeView1.TabIndex = 22
+        '
+        'NameSettings
+        '
+        Me.NameSettings.BackColor = System.Drawing.SystemColors.Window
+        Me.NameSettings.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NameSettings.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.NameSettings.Location = New System.Drawing.Point(199, 12)
+        Me.NameSettings.Margin = New System.Windows.Forms.Padding(2)
+        Me.NameSettings.Name = "NameSettings"
+        Me.NameSettings.Size = New System.Drawing.Size(500, 367)
+        Me.NameSettings.TabIndex = 23
+        Me.NameSettings.Text = "Graphics"
+        '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "Image7.Image.png")
+        Me.ImageList1.Images.SetKeyName(1, "Image5.Image.png")
+        Me.ImageList1.Images.SetKeyName(2, "Image4.Image.png")
+        Me.ImageList1.Images.SetKeyName(3, "Image6.Image.png")
+        Me.ImageList1.Images.SetKeyName(4, "Image9.Image.png")
+        Me.ImageList1.Images.SetKeyName(5, "Image3.Image.png")
+        '
         'frmSettings
         '
+        Me.AcceptButton = Me.cmdOK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(710, 484)
-        Me.Controls.Add(Me.AdvancedSettings)
-        Me.Controls.Add(Me.DisksSettings)
-        Me.Controls.Add(Me.MiscellaneousSettings)
-        Me.Controls.Add(Me.NetworkSettings)
+        Me.CancelButton = Me.cmdCancel
+        Me.ClientSize = New System.Drawing.Size(710, 416)
+        Me.Controls.Add(Me.NameSettings)
+        Me.Controls.Add(Me.TreeView1)
+        Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.GraphicSettings)
-        Me.Controls.Add(Me.ShowAdvanced)
-        Me.Controls.Add(Me.WelcomeText)
-        Me.Controls.Add(Me.CreateConfig)
+        Me.Controls.Add(Me.DisksSettings)
+        Me.Controls.Add(Me.NetworkSettings)
+        Me.Controls.Add(Me.MiscellaneousSettings)
+        Me.Controls.Add(Me.AdvancedSettings)
+        Me.Controls.Add(Me.cmdOK)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
@@ -1231,14 +1280,12 @@ Partial Class frmSettings
         Me.AdvancedSettings.ResumeLayout(False)
         Me.AdvancedSettings.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents CreateConfig As System.Windows.Forms.Button
+    Friend WithEvents cmdOK As System.Windows.Forms.Button
     Friend WithEvents SaveConfigFile As System.Windows.Forms.SaveFileDialog
     Friend WithEvents StandardResolution As System.Windows.Forms.ComboBox
     Friend WithEvents BitDepth As System.Windows.Forms.ComboBox
-    Friend WithEvents WelcomeText As System.Windows.Forms.Label
     Friend WithEvents Resolution As System.Windows.Forms.Label
     Friend WithEvents CustomResolutionCheck As System.Windows.Forms.CheckBox
     Friend WithEvents FullscreenCheck As System.Windows.Forms.CheckBox
@@ -1248,12 +1295,11 @@ Partial Class frmSettings
     Friend WithEvents Browser As System.Windows.Forms.OpenFileDialog
     Friend WithEvents ToggleFullscreenKeyLabel As System.Windows.Forms.Label
     Friend WithEvents ToggleFullscreenKey As System.Windows.Forms.TextBox
-    Friend WithEvents ShowAdvanced As System.Windows.Forms.CheckBox
     Friend WithEvents Redraw As System.Windows.Forms.Label
     Friend WithEvents RedrawTime As System.Windows.Forms.TextBox
-    Friend WithEvents GraphicSettings As System.Windows.Forms.GroupBox
+    Friend WithEvents GraphicSettings As System.Windows.Forms.Panel
     Friend WithEvents Frequency As System.Windows.Forms.NumericUpDown
-    Friend WithEvents DisksSettings As System.Windows.Forms.GroupBox
+    Friend WithEvents DisksSettings As System.Windows.Forms.Panel
     Friend WithEvents MasterTypeLabel As System.Windows.Forms.Label
     Friend WithEvents MasterImageLabel As System.Windows.Forms.Label
     Friend WithEvents MasterDrive As System.Windows.Forms.TextBox
@@ -1271,7 +1317,7 @@ Partial Class frmSettings
     Friend WithEvents BrowseDriver As System.Windows.Forms.Button
     Friend WithEvents GraphicDriver As System.Windows.Forms.TextBox
     Friend WithEvents GraphicDriverLabel As System.Windows.Forms.Label
-    Friend WithEvents NetworkSettings As System.Windows.Forms.GroupBox
+    Friend WithEvents NetworkSettings As System.Windows.Forms.Panel
     Friend WithEvents NetRTL8139 As System.Windows.Forms.CheckBox
     Friend WithEvents Net3c90x As System.Windows.Forms.CheckBox
     Friend WithEvents Mac68139 As System.Windows.Forms.TextBox
@@ -1288,7 +1334,7 @@ Partial Class frmSettings
     Friend WithEvents Mac13c90 As System.Windows.Forms.TextBox
     Friend WithEvents Net8139MacLabel As System.Windows.Forms.Label
     Friend WithEvents Net3c90MacLabel As System.Windows.Forms.Label
-    Friend WithEvents MiscellaneousSettings As System.Windows.Forms.GroupBox
+    Friend WithEvents MiscellaneousSettings As System.Windows.Forms.Panel
     Friend WithEvents RAM As System.Windows.Forms.TextBox
     Friend WithEvents ProcessorLabel As System.Windows.Forms.Label
     Friend WithEvents RAMLabel As System.Windows.Forms.Label
@@ -1296,7 +1342,7 @@ Partial Class frmSettings
     Friend WithEvents PPCG3 As System.Windows.Forms.RadioButton
     Friend WithEvents MB As System.Windows.Forms.Label
     Friend WithEvents EnableUSB As System.Windows.Forms.CheckBox
-    Friend WithEvents AdvancedSettings As System.Windows.Forms.GroupBox
+    Friend WithEvents AdvancedSettings As System.Windows.Forms.Panel
     Friend WithEvents PROMBootPath As System.Windows.Forms.TextBox
     Friend WithEvents PROMFile As System.Windows.Forms.TextBox
     Friend WithEvents PROMBootPathLabel As System.Windows.Forms.Label
@@ -1321,5 +1367,9 @@ Partial Class frmSettings
     Friend WithEvents ComposeDialogKeyLabel As System.Windows.Forms.Label
     Friend WithEvents ComposeDialogKey As System.Windows.Forms.TextBox
     Friend WithEvents EnableSerialPort As System.Windows.Forms.CheckBox
+    Friend WithEvents cmdCancel As System.Windows.Forms.Button
+    Friend WithEvents TreeView1 As System.Windows.Forms.TreeView
+    Friend WithEvents NameSettings As System.Windows.Forms.Panel
+    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
 
 End Class

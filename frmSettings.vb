@@ -1,5 +1,5 @@
 Public Class frmSettings
-    Private Sub CreateConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CreateConfig.Click
+    Private Sub CreateConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdOK.Click
         On Error GoTo ErrorHandler
         Dim DataArray() As String = GetData()
 
@@ -117,7 +117,7 @@ Public Class frmSettings
         SaveConfigFile.ShowDialog()
 
         If Not SaveConfigFile.FileName = "" Then
-            WriteFile(Config, SaveConfigFile.FileName)
+            My.Computer.FileSystem.WriteAllText(SaveConfigFile.FileName, Config, False)
         End If
 
 ErrorHandler:
@@ -126,17 +126,6 @@ ErrorHandler:
             MsgBox(Err.Description)
         End If
 
-    End Sub
-
-    Public Sub WriteFile(ByVal Text As String, ByVal Path As String)
-
-        'Assigning the function a variable for ease of use
-        'assign properties like Route, Append text and encoding type
-        Dim Write As New System.IO.StreamWriter(Path, False, System.Text.Encoding.Default)
-
-        'Writing the Text to the config file
-        Write.WriteLine(Text)
-        Write.Close()
     End Sub
 
     Public Function FormatLine(ByVal Config As String, ByVal Value As String, ByVal NoQuotes As Boolean) As String
@@ -355,12 +344,11 @@ EndFunction:
 
     End Function
     Private Sub Main_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        TreeView1.SelectedNode = TreeView1.TopNode
         StandardResolution.SelectedIndex = 1
         BitDepth.SelectedIndex = 1
         MasterDriveType.SelectedIndex = 0
         SlaveDriveType.SelectedIndex = 1
-
     End Sub
 
     Private Sub CustomResolutionCheck_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CustomResolutionCheck.Click
@@ -380,43 +368,7 @@ EndFunction:
         End If
     End Sub
 
-    Private Sub ShowAdvanced_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ShowAdvanced.Click
-
-        If ShowAdvanced.Checked = True Then
-            GraphicSettings.Height = 120
-            DisksSettings.Height -= 20
-            DisksSettings.Top += 20
-            Redraw.Visible = True
-            RedrawTime.Visible = True
-            GraphicDriverLabel.Visible = True
-            GraphicDriver.Visible = True
-            BrowseDriver.Visible = True
-            MasterDriveTypeBasic.Visible = False
-            MasterDriveType.Visible = True
-            AdvancedSettings.Visible = True
-            ComposeDialogKeyLabel.Visible = True
-            ComposeDialogKey.Visible = True
-            EnableSerialPort.Visible = True
-        Else
-            GraphicSettings.Height = 100
-            DisksSettings.Height += 20
-            DisksSettings.Top -= 20
-            Redraw.Visible = False
-            RedrawTime.Visible = False
-            GraphicDriverLabel.Visible = False
-            GraphicDriver.Visible = False
-            BrowseDriver.Visible = False
-            MasterDriveTypeBasic.Visible = True
-            MasterDriveType.Visible = False
-            AdvancedSettings.Visible = False
-            ComposeDialogKeyLabel.Visible = False
-            ComposeDialogKey.Visible = False
-            EnableSerialPort.Visible = False
-        End If
-
-    End Sub
-
-    Private Sub BrowseDriver_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub BrowseDriver_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BrowseDriver.Click
         Browser.Filter = "All files (*.*)|*.*"
         Browser.ShowDialog()
         GraphicDriver.Text = Browser.FileName
@@ -581,4 +533,34 @@ EndFunction:
     Private Sub MasterDriveType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MasterDriveType.SelectedIndexChanged
         MasterDriveTypeBasic.Text = MasterDriveType.SelectedItem.ToString
     End Sub
+
+    Private Sub TreeView1_AfterSelect(sender As TreeView, e As System.Windows.Forms.TreeViewEventArgs) Handles TreeView1.AfterSelect
+        Select Case sender.SelectedNode.Index
+            Case 0
+                SwitchToPage(NameSettings)
+            Case 1
+                SwitchToPage(GraphicSettings)
+            Case 2
+                SwitchToPage(DisksSettings)
+            Case 3
+                SwitchToPage(NetworkSettings)
+            Case 4
+                SwitchToPage(MiscellaneousSettings)
+            Case 5
+                SwitchToPage(AdvancedSettings)
+        End Select
+    End Sub
+
+    Private Sub SwitchToPage(NewPage As Panel)
+        NameSettings.Visible = False
+        GraphicSettings.Visible = False
+        DisksSettings.Visible = False
+        NetworkSettings.Visible = False
+        MiscellaneousSettings.Visible = False
+        AdvancedSettings.Visible = False
+
+        NewPage.BringToFront()
+        NewPage.Visible = True
+    End Sub
+
 End Class

@@ -24,8 +24,6 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Máquina 1", "Saved"}, 0)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Máquina 2", "Not running"}, 4)
         Me.tbAction = New System.Windows.Forms.ToolStrip()
         Me.tbActionNew = New System.Windows.Forms.ToolStripButton()
         Me.tbActionConfig = New System.Windows.Forms.ToolStripButton()
@@ -34,13 +32,19 @@ Partial Class frmMain
         Me.tbTestLabel = New System.Windows.Forms.ToolStripLabel()
         Me.MainMenu1 = New System.Windows.Forms.MainMenu(Me.components)
         Me.mnuFile = New System.Windows.Forms.MenuItem()
+        Me.mnuFileDiskmaker = New System.Windows.Forms.MenuItem()
+        Me.mnuFileBar0 = New System.Windows.Forms.MenuItem()
         Me.mnuFilePrefs = New System.Windows.Forms.MenuItem()
         Me.mnuMachine = New System.Windows.Forms.MenuItem()
         Me.mnuMachineNew = New System.Windows.Forms.MenuItem()
-        Me.mnuMachineAdd = New System.Windows.Forms.MenuItem()
+        Me.mnuMachineBar0 = New System.Windows.Forms.MenuItem()
+        Me.mnuMachineImport = New System.Windows.Forms.MenuItem()
+        Me.mnuMachineExport = New System.Windows.Forms.MenuItem()
         Me.mnuHelp = New System.Windows.Forms.MenuItem()
+        Me.mnuHelpContents = New System.Windows.Forms.MenuItem()
+        Me.mnuHelpBar0 = New System.Windows.Forms.MenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.MenuItem()
-        Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
+        Me.Importer = New System.Windows.Forms.OpenFileDialog()
         Me.VMPics = New System.Windows.Forms.ImageList(Me.components)
         Me.lvVmlist = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -70,6 +74,9 @@ Partial Class frmMain
         Me.panWelcomePic = New System.Windows.Forms.PictureBox()
         Me.panWelcomeDescription = New System.Windows.Forms.Label()
         Me.panWelcomeTitle = New System.Windows.Forms.Label()
+        Me.Exporter = New System.Windows.Forms.SaveFileDialog()
+        Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
+        Me.MenuItem1 = New System.Windows.Forms.MenuItem()
         Me.tbAction.SuspendLayout()
         Me.panMain.SuspendLayout()
         Me.panDetFlowContainer.SuspendLayout()
@@ -150,18 +157,28 @@ Partial Class frmMain
         'mnuFile
         '
         Me.mnuFile.Index = 0
-        Me.mnuFile.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuFilePrefs})
+        Me.mnuFile.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuFileDiskmaker, Me.mnuFileBar0, Me.mnuFilePrefs})
         Me.mnuFile.Text = "File"
+        '
+        'mnuFileDiskmaker
+        '
+        Me.mnuFileDiskmaker.Index = 0
+        Me.mnuFileDiskmaker.Text = "Disk image maker"
+        '
+        'mnuFileBar0
+        '
+        Me.mnuFileBar0.Index = 1
+        Me.mnuFileBar0.Text = "-"
         '
         'mnuFilePrefs
         '
-        Me.mnuFilePrefs.Index = 0
+        Me.mnuFilePrefs.Index = 2
         Me.mnuFilePrefs.Text = "Preferences"
         '
         'mnuMachine
         '
         Me.mnuMachine.Index = 1
-        Me.mnuMachine.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuMachineNew, Me.mnuMachineAdd})
+        Me.mnuMachine.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuMachineNew, Me.mnuMachineBar0, Me.mnuMachineImport, Me.mnuMachineExport})
         Me.mnuMachine.Text = "Machine"
         '
         'mnuMachineNew
@@ -170,25 +187,47 @@ Partial Class frmMain
         Me.mnuMachineNew.Shortcut = System.Windows.Forms.Shortcut.CtrlN
         Me.mnuMachineNew.Text = "New"
         '
-        'mnuMachineAdd
+        'mnuMachineBar0
         '
-        Me.mnuMachineAdd.Index = 1
-        Me.mnuMachineAdd.Text = "Add"
+        Me.mnuMachineBar0.Index = 1
+        Me.mnuMachineBar0.Text = "-"
+        '
+        'mnuMachineImport
+        '
+        Me.mnuMachineImport.Index = 2
+        Me.mnuMachineImport.Text = "Import"
+        '
+        'mnuMachineExport
+        '
+        Me.mnuMachineExport.Enabled = False
+        Me.mnuMachineExport.Index = 3
+        Me.mnuMachineExport.Text = "Export"
         '
         'mnuHelp
         '
         Me.mnuHelp.Index = 2
-        Me.mnuHelp.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuHelpAbout})
+        Me.mnuHelp.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuHelpContents, Me.mnuHelpBar0, Me.mnuHelpAbout, Me.MenuItem1})
         Me.mnuHelp.Text = "Help"
+        '
+        'mnuHelpContents
+        '
+        Me.mnuHelpContents.Index = 0
+        Me.mnuHelpContents.Text = "Contents"
+        '
+        'mnuHelpBar0
+        '
+        Me.mnuHelpBar0.Index = 1
+        Me.mnuHelpBar0.Text = "-"
         '
         'mnuHelpAbout
         '
-        Me.mnuHelpAbout.Index = 0
+        Me.mnuHelpAbout.Index = 2
         Me.mnuHelpAbout.Text = "About"
         '
-        'OpenFile
+        'Importer
         '
-        Me.OpenFile.FileName = "OpenFileDialog1"
+        Me.Importer.FileName = "PearPC.cfg"
+        Me.Importer.Filter = "PearPC Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*"
         '
         'VMPics
         '
@@ -211,7 +250,6 @@ Partial Class frmMain
         Me.lvVmlist.FullRowSelect = True
         Me.lvVmlist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvVmlist.HideSelection = False
-        Me.lvVmlist.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
         Me.lvVmlist.LabelWrap = False
         Me.lvVmlist.LargeImageList = Me.VMPics
         Me.lvVmlist.Location = New System.Drawing.Point(0, 54)
@@ -559,6 +597,18 @@ Partial Class frmMain
         Me.panWelcomeTitle.TabIndex = 3
         Me.panWelcomeTitle.Text = "Welcome to PearBox 3.0!"
         '
+        'Exporter
+        '
+        Me.Exporter.FileName = "PearPC.cfg"
+        Me.Exporter.Filter = "PearPC Config Files (*.cfg)|*.cfg|All Files (*.*)|*.*"
+        Me.Exporter.RestoreDirectory = True
+        Me.Exporter.SupportMultiDottedExtensions = True
+        '
+        'MenuItem1
+        '
+        Me.MenuItem1.Index = 3
+        Me.MenuItem1.Text = "Debug window"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -601,14 +651,14 @@ Partial Class frmMain
     Friend WithEvents tbStart As System.Windows.Forms.ToolStripButton
     Friend WithEvents MainMenu1 As System.Windows.Forms.MainMenu
     Friend WithEvents mnuFile As System.Windows.Forms.MenuItem
-    Friend WithEvents OpenFile As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents Importer As System.Windows.Forms.OpenFileDialog
     Friend WithEvents tbActionNew As System.Windows.Forms.ToolStripButton
     Friend WithEvents tbActionConfig As System.Windows.Forms.ToolStripButton
     Friend WithEvents tbDelete As System.Windows.Forms.ToolStripButton
     Friend WithEvents mnuFilePrefs As System.Windows.Forms.MenuItem
     Friend WithEvents mnuMachine As System.Windows.Forms.MenuItem
     Friend WithEvents mnuMachineNew As System.Windows.Forms.MenuItem
-    Friend WithEvents mnuMachineAdd As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuMachineImport As System.Windows.Forms.MenuItem
     Friend WithEvents mnuHelp As System.Windows.Forms.MenuItem
     Friend WithEvents mnuHelpAbout As System.Windows.Forms.MenuItem
     Friend WithEvents VMPics As System.Windows.Forms.ImageList
@@ -641,4 +691,13 @@ Partial Class frmMain
     Friend WithEvents panDetKeysControls As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents mnuFileDiskmaker As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuFileBar0 As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuHelpContents As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuHelpBar0 As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuMachineBar0 As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuMachineExport As System.Windows.Forms.MenuItem
+    Friend WithEvents Exporter As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents HelpProvider1 As System.Windows.Forms.HelpProvider
+    Friend WithEvents MenuItem1 As System.Windows.Forms.MenuItem
 End Class

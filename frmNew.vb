@@ -1,7 +1,11 @@
 ﻿Public Class frmNew
-
+    Dim MacParentPath As String = My.Settings.DefaultNewMacPath
     Dim TotalRAM As Integer
     Private Sub frmNew_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        If My.Settings.DefaultNewMacPath = "" Then
+            MsgBox("The default Mac path is not set. Please set it before trying to create a new Mac.", MsgBoxStyle.Exclamation, frmMain.Fortune)
+            Me.Close()
+        End If
         Page0FamilyCmb.SelectedIndex = 0
         TotalRAM = Math.Round((((My.Computer.Info.TotalPhysicalMemory) / 1024) / 1024), 0)
         Page1MemorySldr.Maximum = TotalRAM
@@ -41,6 +45,93 @@
             sender.Enabled = False
             CreateMac()
             Me.Close()
+        End If
+    End Sub
+
+    Private Sub Page0NameText_TextChanged(sender As TextBox, e As System.EventArgs) Handles Page0NameText.TextChanged
+        If sender.Text = "" Then
+            cmdNext.Enabled = False
+        Else
+            cmdNext.Enabled = True
+        End If
+    End Sub
+
+    Private Sub Page0FamilyCmb_SelectedIndexChanged(sender As ComboBox, e As System.EventArgs) Handles Page0FamilyCmb.SelectedIndexChanged
+        Select Case Page0FamilyCmb.SelectedIndex
+            Case 0
+                With Page0VersionCmb
+                    .Items.Clear()
+                    .Items.Add("Mac OS X 10.2 Cheetah")
+                    .Items.Add("Mac OS X 10.3 Panther")
+                    .Items.Add("Mac OS X 10.4 Tiger")
+                    .Items.Add("Other Mac OS X")
+                    .SelectedIndex = 0
+                End With
+            Case 1
+                With Page0VersionCmb
+                    .Items.Clear()
+                    .Items.Add("Debian")
+                    .Items.Add("Ubuntu")
+                    .SelectedIndex = 0
+                End With
+            Case 2
+                With Page0VersionCmb
+                    .Items.Clear()
+                    .Items.Add("Other")
+                    .SelectedIndex = 0
+                End With
+        End Select
+    End Sub
+
+    Private Sub Page1MemorySldr_ValueChanged(sender As TrackBar, e As System.EventArgs) Handles Page1MemorySldr.ValueChanged
+        Page1MemoryNumUD.Value = sender.Value
+    End Sub
+
+    Private Sub Page1MemoryNumUD_ValueChanged(sender As NumericUpDown, e As System.EventArgs) Handles Page1MemoryNumUD.ValueChanged
+        Page1MemorySldr.Value = sender.Value
+    End Sub
+
+    Private Sub Page2DiskLocBrowseBtn_Click(sender As System.Object, e As System.EventArgs) Handles Page2DiskLocBrowseBtn.Click
+        If Page2ExistRadio.Checked Then
+            If OpenFile.ShowDialog <> Windows.Forms.DialogResult.Cancel Then
+                Page2DiskLocTxt.Text = OpenFile.FileName
+                OpenFile.FileName = ""
+            End If
+        ElseIf Page2NewRadio.Checked Then
+            If SaveFile.ShowDialog <> Windows.Forms.DialogResult.Cancel Then
+                Page2DiskLocTxt.Text = SaveFile.FileName
+                SaveFile.FileName = ""
+            End If
+        End If
+    End Sub
+
+    Private Sub Page2NewRadio_CheckedChanged(sender As RadioButton, e As System.EventArgs) Handles Page2NewRadio.CheckedChanged
+        If sender.Checked Then
+            Page2DiskNewSizeLabel.Visible = True
+            Page2DiskNewSizeNumUD.Visible = True
+        Else
+            Page2DiskNewSizeLabel.Visible = False
+            Page2DiskNewSizeNumUD.Visible = False
+        End If
+    End Sub
+
+    Private Sub Page2NoneRadio_CheckedChanged(sender As RadioButton, e As System.EventArgs) Handles Page2NoneRadio.CheckedChanged
+        If sender.Checked Then
+            cmdNext.Enabled = True
+            Page2DiskLocBrowseBtn.Enabled = False
+            Page2DiskLocTxt.Enabled = False
+        Else
+            Page2DiskLocBrowseBtn.Enabled = True
+            Page2DiskLocTxt.Enabled = True
+            Page2DiskLocTxt_TextChanged(Page2DiskLocTxt, System.EventArgs.Empty)
+        End If
+    End Sub
+
+    Private Sub Page2DiskLocTxt_TextChanged(sender As TextBox, e As System.EventArgs) Handles Page2DiskLocTxt.TextChanged
+        If sender.Text = "" Then
+            cmdNext.Enabled = False
+        Else
+            cmdNext.Enabled = True
         End If
     End Sub
 
@@ -84,101 +175,48 @@
         End Select
     End Sub
 
+    Private Function GetData() As String()
+        Dim Memory As String = "0x" & (Page1MemoryNumUD.Value / 0.0000256)
+        Dim MasterEnabled As String = "1"
+        Dim MasterImage As String = Page2DiskLocTxt.Text
+
+        If Not Page2NoneRadio.Checked Then
+            MasterEnabled = "0"
+        End If
+
+        Return {Memory, MasterEnabled, MasterImage}
+    End Function
+
     Private Sub CreateMac()
+        'Creating paths
+        Dim MacPath As String = MacParentPath & "\" & Page0NameText.Text
+        My.Computer.FileSystem.CreateDirectory(MacPath)
+
+        'Adding to listview, and at the same time creating the Mac
         With frmMain.lvVmlist.Items.Add(Page0NameText.Text)
             Select Case Page0VersionCmb.SelectedItem.ToString
                 Case "Mac OS X 10.2 Cheetah"
+                    .SubItems.Add(MacMaker.CreateMac(MacPath, GetData()))
                     .ImageIndex = 2
                 Case "Mac OS X 10.3 Panther"
+                    .SubItems.Add(MacMaker.CreateMac(MacPath, GetData()))
                     .ImageIndex = 3
                 Case "Mac OS X 10.4 Tiger"
+                    .SubItems.Add(MacMaker.CreateMac(MacPath, GetData()))
                     .ImageIndex = 4
                 Case "Other Mac OS X"
+                    .SubItems.Add(MacMaker.CreateMac(MacPath, GetData()))
                     .ImageIndex = 1
                 Case "Debian"
+                    .SubItems.Add(MacMaker.CreateMac(MacPath, GetData()))
                     .ImageIndex = 5
                 Case "Ubuntu"
+                    .SubItems.Add(MacMaker.CreateMac(MacPath, GetData()))
                     .ImageIndex = 5
                 Case "Other"
+                    .SubItems.Add(MacMaker.CreateMac(MacPath, GetData()))
                     .ImageIndex = 0
             End Select
         End With
-    End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As ComboBox, e As System.EventArgs) Handles Page0FamilyCmb.SelectedIndexChanged
-        Select Case Page0FamilyCmb.SelectedIndex
-            Case 0
-                With Page0VersionCmb
-                    .Items.Clear()
-                    .Items.Add("Mac OS X 10.2 Cheetah")
-                    .Items.Add("Mac OS X 10.3 Panther")
-                    .Items.Add("Mac OS X 10.4 Tiger")
-                    .Items.Add("Other Mac OS X")
-                    .SelectedIndex = 0
-                End With
-            Case 1
-                With Page0VersionCmb
-                    .Items.Clear()
-                    .Items.Add("Debian")
-                    .Items.Add("Ubuntu")
-                    .SelectedIndex = 0
-                End With
-            Case 2
-                With Page0VersionCmb
-                    .Items.Clear()
-                    .Items.Add("Other")
-                    .SelectedIndex = 0
-                End With
-        End Select
-    End Sub
-
-    Private Sub Page2DiskLocBrowseBtn_Click(sender As System.Object, e As System.EventArgs) Handles Page2DiskLocBrowseBtn.Click
-        If Page2ExistRadio.Checked Then
-            If OpenFile.ShowDialog <> Windows.Forms.DialogResult.Cancel Then
-                Page2DiskLocTxt.Text = OpenFile.FileName
-                OpenFile.FileName = ""
-            End If
-        ElseIf Page2NewRadio.Checked Then
-            If SaveFile.ShowDialog <> Windows.Forms.DialogResult.Cancel Then
-                Page2DiskLocTxt.Text = SaveFile.FileName
-                SaveFile.FileName = ""
-            End If
-        End If
-    End Sub
-
-    Private Sub Page2NewRadio_CheckedChanged(sender As RadioButton, e As System.EventArgs) Handles Page2NewRadio.CheckedChanged
-        If sender.Checked Then
-            Page2DiskNewSizeLabel.Visible = True
-            Page2DiskNewSizeNumUD.Visible = True
-        Else
-            Page2DiskNewSizeLabel.Visible = False
-            Page2DiskNewSizeNumUD.Visible = False
-        End If
-    End Sub
-
-    Private Sub Page2NoneRadio_CheckedChanged(sender As RadioButton, e As System.EventArgs) Handles Page2NoneRadio.CheckedChanged
-        If sender.Checked Then
-            Page2DiskLocBrowseBtn.Enabled = False
-            Page2DiskLocTxt.Enabled = False
-        Else
-            Page2DiskLocBrowseBtn.Enabled = True
-            Page2DiskLocTxt.Enabled = True
-        End If
-    End Sub
-
-    Private Sub Page1MemorySldr_ValueChanged(sender As TrackBar, e As System.EventArgs) Handles Page1MemorySldr.ValueChanged
-        Page1MemoryNumUD.Value = sender.Value
-    End Sub
-
-    Private Sub Page1MemoryNumUD_ValueChanged(sender As NumericUpDown, e As System.EventArgs) Handles Page1MemoryNumUD.ValueChanged
-        Page1MemorySldr.Value = sender.Value
-    End Sub
-
-    Private Sub Page0NameText_TextChanged(sender As TextBox, e As System.EventArgs) Handles Page0NameText.TextChanged
-        If sender.Text = "" Then
-            cmdNext.Enabled = False
-        Else
-            cmdNext.Enabled = True
-        End If
     End Sub
 End Class

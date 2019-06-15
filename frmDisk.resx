@@ -117,32 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Page0DescriptionLabel.Text" xml:space="preserve">
-    <value>It's recommended to use a descriptive name for your new machine. Also it's recommended to set the OS you are going to install, so that PearBox can recommend you a certain hardware configuration for the OS.
-
-PearBox will try to detect what OS you are gonna install based on the name you type here, but it might not always match, so be sure to set the correct operating system.</value>
-  </data>
-  <metadata name="Page2DiskLocTxt.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Page1DescriptionLabel.Text" xml:space="preserve">
-    <value>An emulated Mac needs memory just like any of your
-programs does. In this page you are going to set the
-amount of memory you want to assign to this Mac.
-
-By default we recommend you certain amount, enough
-for basic funcionality of the OS and applications.</value>
-  </data>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>8, 4</value>
+    <value>113, 4</value>
   </metadata>
-  <metadata name="OpenFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>98, 2</value>
-  </metadata>
+  <data name="Page0DescriptionLabel.Text" xml:space="preserve">
+    <value>An emulated Mac needs an emulated disk, which is stored
+as a file in your computer. 
+
+You can create several types of disks:
+  -Fixed disk
+    The standard disk where the OS and files reside.
+  -Removable blank 1.44 diskette
+    A blank diskette with 1.44 MB of space, ready to use and
+    to transport files among machines.
+  -Removable System 7.0 1.44 diskette
+    A bootable 1.44 MB diskette containing System 7.0.
+  -Removable System 8.5 1.44 diskette
+    A bootable 1.44 MB diskette containing System 8.5.</value>
+  </data>
   <metadata name="SaveFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>191, 2</value>
+    <value>212, 4</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>42</value>
+    <value>43</value>
   </metadata>
 </root>
