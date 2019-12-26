@@ -125,15 +125,16 @@
 as a file in your computer. 
 
 You can create several types of disks:
+
   -Fixed disk
-    The standard disk where the OS and files reside.
+       The standard disk where the OS and files reside.
   -Removable blank 1.44 diskette
-    A blank diskette with 1.44 MB of space, ready to use and
-    to transport files among machines.
+       A blank diskette with 1.44 MB of space, ready to use and
+       to transport files among machines.
   -Removable System 7.0 1.44 diskette
-    A bootable 1.44 MB diskette containing System 7.0.
+       A bootable 1.44 MB diskette containing System 7.0.
   -Removable System 8.5 1.44 diskette
-    A bootable 1.44 MB diskette containing System 8.5.</value>
+       A bootable 1.44 MB diskette containing System 8.5.</value>
   </data>
   <metadata name="SaveFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>212, 4</value>

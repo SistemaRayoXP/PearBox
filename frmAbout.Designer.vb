@@ -36,7 +36,7 @@ Partial Class frmAbout
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(217, 9)
+        Me.Label1.Location = New System.Drawing.Point(196, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(196, 58)
         Me.Label1.TabIndex = 0
@@ -57,7 +57,7 @@ Partial Class frmAbout
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(225, 67)
+        Me.Label3.Location = New System.Drawing.Point(204, 67)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 19)
         Me.Label3.TabIndex = 3
@@ -65,36 +65,36 @@ Partial Class frmAbout
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(136, 186)
+        Me.Label2.Location = New System.Drawing.Point(110, 186)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(196, 13)
+        Me.Label2.Size = New System.Drawing.Size(237, 13)
         Me.Label2.TabIndex = 4
         Me.Label2.Text = "Portions © Tecnologias Edson Armando"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label5
         '
-        Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(125, 199)
+        Me.Label5.Location = New System.Drawing.Point(110, 199)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(207, 13)
+        Me.Label5.Size = New System.Drawing.Size(237, 13)
         Me.Label5.TabIndex = 6
         Me.Label5.Text = "Original front-end by Jamie Barlett (2009)"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'Label4
         '
-        Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(117, 212)
+        Me.Label4.Location = New System.Drawing.Point(107, 212)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(215, 13)
+        Me.Label4.Size = New System.Drawing.Size(240, 13)
         Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Artwork by Flameia Design (Julia Nikolaeva)"
+        Me.Label4.Text = "OS Artwork by Flameia Design (Julia Nikolaeva)"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'frmAbout
         '

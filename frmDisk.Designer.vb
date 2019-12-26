@@ -207,7 +207,7 @@ Partial Class frmDisk
         'Page0DisktypeLabel
         '
         Me.Page0DisktypeLabel.AutoSize = True
-        Me.Page0DisktypeLabel.Location = New System.Drawing.Point(21, 230)
+        Me.Page0DisktypeLabel.Location = New System.Drawing.Point(21, 250)
         Me.Page0DisktypeLabel.Name = "Page0DisktypeLabel"
         Me.Page0DisktypeLabel.Size = New System.Drawing.Size(54, 13)
         Me.Page0DisktypeLabel.TabIndex = 6
@@ -219,7 +219,7 @@ Partial Class frmDisk
         Me.Page0DescriptionLabel.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Page0DescriptionLabel.Location = New System.Drawing.Point(24, 52)
         Me.Page0DescriptionLabel.Name = "Page0DescriptionLabel"
-        Me.Page0DescriptionLabel.Size = New System.Drawing.Size(289, 169)
+        Me.Page0DescriptionLabel.Size = New System.Drawing.Size(298, 182)
         Me.Page0DescriptionLabel.TabIndex = 1
         Me.Page0DescriptionLabel.Text = resources.GetString("Page0DescriptionLabel.Text")
         '
@@ -228,15 +228,15 @@ Partial Class frmDisk
         Me.Page0DisktypeCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Page0DisktypeCmb.FormattingEnabled = True
         Me.Page0DisktypeCmb.Items.AddRange(New Object() {"Fixed disk drive", "Removable blank 1.44 MB diskette", "Removable System 7.0 (68k) 1.44 MB diskette", "Removable System 8.5 (PPC) 1.44 MB diskette"})
-        Me.Page0DisktypeCmb.Location = New System.Drawing.Point(81, 227)
+        Me.Page0DisktypeCmb.Location = New System.Drawing.Point(81, 247)
         Me.Page0DisktypeCmb.Name = "Page0DisktypeCmb"
         Me.Page0DisktypeCmb.Size = New System.Drawing.Size(224, 21)
         Me.Page0DisktypeCmb.TabIndex = 5
         '
         'panPages
         '
-        Me.panPages.Controls.Add(Me.pansubPage1)
         Me.panPages.Controls.Add(Me.pansubPage0)
+        Me.panPages.Controls.Add(Me.pansubPage1)
         Me.panPages.Controls.Add(Me.pansubWizardPic)
         Me.panPages.Dock = System.Windows.Forms.DockStyle.Top
         Me.panPages.Location = New System.Drawing.Point(0, 0)

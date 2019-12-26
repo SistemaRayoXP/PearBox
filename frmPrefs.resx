@@ -120,4 +120,14 @@
   <metadata name="FolderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>The selected language is automatically chosen depending on the language code provided
+by the operating system. If your language was not automatically selected, it might mean
+that it's not available in the application yet.
+
+The changes will take effect after restarting the application.</value>
+  </data>
+  <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>188, 17</value>
+  </metadata>
 </root>

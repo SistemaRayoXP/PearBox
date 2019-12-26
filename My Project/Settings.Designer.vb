@@ -149,6 +149,42 @@ Namespace My
                 Me("RandomTitles") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property UpdateSetting() As Integer
+            Get
+                Return CType(Me("UpdateSetting"),Integer)
+            End Get
+            Set
+                Me("UpdateSetting") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Locale() As String
+            Get
+                Return CType(Me("Locale"),String)
+            End Get
+            Set
+                Me("Locale") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property PPCExecutable() As String
+            Get
+                Return CType(Me("PPCExecutable"),String)
+            End Get
+            Set
+                Me("PPCExecutable") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

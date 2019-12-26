@@ -1,4 +1,6 @@
-﻿Imports System
+﻿Imports System.Resources
+
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -12,10 +14,10 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("PearBox")> 
-<Assembly: AssemblyCopyright("Copyright ©  2019")> 
+<Assembly: AssemblyCopyright("Copyright © TEA 2014-2019")> 
 <Assembly: AssemblyTrademark("")> 
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(True)> 
 
 'El siguiente GUID sirve como identificador de typelib si este proyecto se expone a COM
 <Assembly: Guid("27e923f6-f213-459d-8f2c-00e6cc8f35f3")> 
@@ -31,5 +33,7 @@ Imports System.Runtime.InteropServices
 ' mediante el asterisco ('*'), como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("0.7.0.0")> 
+<Assembly: AssemblyFileVersion("0.7.0.0")> 
+
+<Assembly: NeutralResourcesLanguageAttribute("en")> 

@@ -122,8 +122,8 @@
 
 PearBox will try to detect what OS you are gonna install based on the name you type here, but it might not always match, so be sure to set the correct operating system.</value>
   </data>
-  <metadata name="Page2DiskLocTxt.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>8, 4</value>
   </metadata>
   <data name="Page1DescriptionLabel.Text" xml:space="preserve">
     <value>An emulated Mac needs memory just like any of your
@@ -132,6 +132,16 @@ amount of memory you want to assign to this Mac.
 
 By default we recommend you certain amount, enough
 for basic funcionality of the OS and applications.</value>
+  </data>
+  <data name="Page2DescriptionLabel.Text" xml:space="preserve">
+    <value>The hard disk is where your files, applications and the
+operating system reside. Unless you have a preconfigured
+virtual hard disk, or plan to use a boot cd, you must create
+a hard disk in order to boot your Mac. 
+
+The recommended size is minded with the OS you are going
+to install plus data. If you are planning to install big applications
+such as Microsoft Office, you should increase the default size.</value>
   </data>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>8, 4</value>

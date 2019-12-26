@@ -29,12 +29,13 @@ Partial Class frmMain
         Me.tbActionConfig = New System.Windows.Forms.ToolStripButton()
         Me.tbDelete = New System.Windows.Forms.ToolStripButton()
         Me.tbStart = New System.Windows.Forms.ToolStripButton()
-        Me.tbTestLabel = New System.Windows.Forms.ToolStripLabel()
         Me.MainMenu1 = New System.Windows.Forms.MainMenu(Me.components)
         Me.mnuFile = New System.Windows.Forms.MenuItem()
-        Me.mnuFileDiskmaker = New System.Windows.Forms.MenuItem()
-        Me.mnuFileBar0 = New System.Windows.Forms.MenuItem()
         Me.mnuFilePrefs = New System.Windows.Forms.MenuItem()
+        Me.mnuFileBar0 = New System.Windows.Forms.MenuItem()
+        Me.mnuFileDiskmaker = New System.Windows.Forms.MenuItem()
+        Me.MenuItem1 = New System.Windows.Forms.MenuItem()
+        Me.mnuFileExit = New System.Windows.Forms.MenuItem()
         Me.mnuMachine = New System.Windows.Forms.MenuItem()
         Me.mnuMachineNew = New System.Windows.Forms.MenuItem()
         Me.mnuMachineBar0 = New System.Windows.Forms.MenuItem()
@@ -44,12 +45,11 @@ Partial Class frmMain
         Me.mnuHelpContents = New System.Windows.Forms.MenuItem()
         Me.mnuHelpBar0 = New System.Windows.Forms.MenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.MenuItem()
+        Me.mnuHelpDebugWnd = New System.Windows.Forms.MenuItem()
         Me.Importer = New System.Windows.Forms.OpenFileDialog()
         Me.VMPics = New System.Windows.Forms.ImageList(Me.components)
         Me.lvVmlist = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.panMain = New System.Windows.Forms.ScrollableControl()
-        Me.panDetFlowContainer = New System.Windows.Forms.FlowLayoutPanel()
         Me.panDetSys = New System.Windows.Forms.Panel()
         Me.panDetSysPic = New System.Windows.Forms.PictureBox()
         Me.panDetSysLink = New System.Windows.Forms.LinkLabel()
@@ -76,10 +76,11 @@ Partial Class frmMain
         Me.panWelcomeTitle = New System.Windows.Forms.Label()
         Me.Exporter = New System.Windows.Forms.SaveFileDialog()
         Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
-        Me.MenuItem1 = New System.Windows.Forms.MenuItem()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.GuiltyPPC = New System.Windows.Forms.Timer(Me.components)
+        Me.PPCSubProcess = New System.ComponentModel.BackgroundWorker()
         Me.tbAction.SuspendLayout()
-        Me.panMain.SuspendLayout()
-        Me.panDetFlowContainer.SuspendLayout()
         Me.panDetSys.SuspendLayout()
         CType(Me.panDetSysPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panDetNet.SuspendLayout()
@@ -90,13 +91,15 @@ Partial Class frmMain
         CType(Me.panDetKeysPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.panWelcomePic, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbAction
         '
         Me.tbAction.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.tbAction.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.tbAction.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbActionNew, Me.tbActionConfig, Me.tbDelete, Me.tbStart, Me.tbTestLabel})
+        Me.tbAction.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbActionNew, Me.tbActionConfig, Me.tbDelete, Me.tbStart})
         Me.tbAction.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.tbAction.Location = New System.Drawing.Point(0, 0)
         Me.tbAction.Name = "tbAction"
@@ -144,12 +147,6 @@ Partial Class frmMain
         Me.tbStart.Text = "Start"
         Me.tbStart.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
-        'tbTestLabel
-        '
-        Me.tbTestLabel.Name = "tbTestLabel"
-        Me.tbTestLabel.Size = New System.Drawing.Size(35, 51)
-        Me.tbTestLabel.Text = "Test1"
-        '
         'MainMenu1
         '
         Me.MainMenu1.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuFile, Me.mnuMachine, Me.mnuHelp})
@@ -157,23 +154,34 @@ Partial Class frmMain
         'mnuFile
         '
         Me.mnuFile.Index = 0
-        Me.mnuFile.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuFileDiskmaker, Me.mnuFileBar0, Me.mnuFilePrefs})
+        Me.mnuFile.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuFilePrefs, Me.mnuFileBar0, Me.mnuFileDiskmaker, Me.MenuItem1, Me.mnuFileExit})
         Me.mnuFile.Text = "File"
         '
-        'mnuFileDiskmaker
+        'mnuFilePrefs
         '
-        Me.mnuFileDiskmaker.Index = 0
-        Me.mnuFileDiskmaker.Text = "Disk image maker"
+        Me.mnuFilePrefs.Index = 0
+        Me.mnuFilePrefs.Text = "Preferences"
         '
         'mnuFileBar0
         '
         Me.mnuFileBar0.Index = 1
         Me.mnuFileBar0.Text = "-"
         '
-        'mnuFilePrefs
+        'mnuFileDiskmaker
         '
-        Me.mnuFilePrefs.Index = 2
-        Me.mnuFilePrefs.Text = "Preferences"
+        Me.mnuFileDiskmaker.Index = 2
+        Me.mnuFileDiskmaker.Text = "Disk image maker"
+        '
+        'MenuItem1
+        '
+        Me.MenuItem1.Index = 3
+        Me.MenuItem1.Text = "-"
+        '
+        'mnuFileExit
+        '
+        Me.mnuFileExit.Index = 4
+        Me.mnuFileExit.Shortcut = System.Windows.Forms.Shortcut.CtrlX
+        Me.mnuFileExit.Text = "Exit"
         '
         'mnuMachine
         '
@@ -206,7 +214,7 @@ Partial Class frmMain
         'mnuHelp
         '
         Me.mnuHelp.Index = 2
-        Me.mnuHelp.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuHelpContents, Me.mnuHelpBar0, Me.mnuHelpAbout, Me.MenuItem1})
+        Me.mnuHelp.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuHelpContents, Me.mnuHelpBar0, Me.mnuHelpAbout, Me.mnuHelpDebugWnd})
         Me.mnuHelp.Text = "Help"
         '
         'mnuHelpContents
@@ -223,6 +231,11 @@ Partial Class frmMain
         '
         Me.mnuHelpAbout.Index = 2
         Me.mnuHelpAbout.Text = "About"
+        '
+        'mnuHelpDebugWnd
+        '
+        Me.mnuHelpDebugWnd.Index = 3
+        Me.mnuHelpDebugWnd.Text = "Debug window"
         '
         'Importer
         '
@@ -269,47 +282,20 @@ Partial Class frmMain
         '
         Me.ColumnHeader1.Width = 249
         '
-        'panMain
-        '
-        Me.panMain.AutoScroll = True
-        Me.panMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.panMain.Controls.Add(Me.panDetFlowContainer)
-        Me.panMain.Controls.Add(Me.Panel1)
-        Me.panMain.Location = New System.Drawing.Point(259, 54)
-        Me.panMain.Name = "panMain"
-        Me.panMain.Size = New System.Drawing.Size(400, 351)
-        Me.panMain.TabIndex = 4
-        Me.panMain.Text = "ScrollableControl1"
-        '
-        'panDetFlowContainer
-        '
-        Me.panDetFlowContainer.AutoScroll = True
-        Me.panDetFlowContainer.AutoSize = True
-        Me.panDetFlowContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.panDetFlowContainer.BackgroundImage = Global.PearBox.My.Resources.Resources.Apple
-        Me.panDetFlowContainer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.panDetFlowContainer.Controls.Add(Me.panDetSys)
-        Me.panDetFlowContainer.Controls.Add(Me.panDetNet)
-        Me.panDetFlowContainer.Controls.Add(Me.panDetBoot)
-        Me.panDetFlowContainer.Controls.Add(Me.panDetKeys)
-        Me.panDetFlowContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.panDetFlowContainer.Location = New System.Drawing.Point(0, 0)
-        Me.panDetFlowContainer.Name = "panDetFlowContainer"
-        Me.panDetFlowContainer.Size = New System.Drawing.Size(400, 351)
-        Me.panDetFlowContainer.TabIndex = 11
-        '
         'panDetSys
         '
         Me.panDetSys.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.panDetSys.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.panDetSys.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.panDetSys.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panDetSys.Controls.Add(Me.panDetSysPic)
         Me.panDetSys.Controls.Add(Me.panDetSysLink)
         Me.panDetSys.Controls.Add(Me.panDetSysCollapse)
         Me.panDetSys.Controls.Add(Me.panDetSysControls)
         Me.panDetSys.Dock = System.Windows.Forms.DockStyle.Top
-        Me.panDetSys.Location = New System.Drawing.Point(3, 3)
+        Me.panDetSys.Location = New System.Drawing.Point(8, 8)
+        Me.panDetSys.MinimumSize = New System.Drawing.Size(250, 2)
         Me.panDetSys.Name = "panDetSys"
-        Me.panDetSys.Size = New System.Drawing.Size(394, 49)
+        Me.panDetSys.Size = New System.Drawing.Size(390, 49)
         Me.panDetSys.TabIndex = 0
         '
         'panDetSysPic
@@ -343,21 +329,22 @@ Partial Class frmMain
         Me.panDetSysCollapse.BackColor = System.Drawing.Color.Transparent
         Me.panDetSysCollapse.BackgroundImage = Global.PearBox.My.Resources.Resources.ArrowUp
         Me.panDetSysCollapse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.panDetSysCollapse.Dock = System.Windows.Forms.DockStyle.Right
         Me.panDetSysCollapse.FlatAppearance.BorderSize = 0
         Me.panDetSysCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.panDetSysCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.panDetSysCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.panDetSysCollapse.Location = New System.Drawing.Point(368, 0)
+        Me.panDetSysCollapse.Location = New System.Drawing.Point(360, 0)
         Me.panDetSysCollapse.Name = "panDetSysCollapse"
-        Me.panDetSysCollapse.Size = New System.Drawing.Size(29, 19)
+        Me.panDetSysCollapse.Size = New System.Drawing.Size(28, 18)
         Me.panDetSysCollapse.TabIndex = 7
         Me.panDetSysCollapse.UseVisualStyleBackColor = False
         '
         'panDetSysControls
         '
         Me.panDetSysControls.BackColor = System.Drawing.SystemColors.Window
-        Me.panDetSysControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.panDetSysControls.Location = New System.Drawing.Point(3, 18)
+        Me.panDetSysControls.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.panDetSysControls.Location = New System.Drawing.Point(0, 18)
         Me.panDetSysControls.Name = "panDetSysControls"
         Me.panDetSysControls.Size = New System.Drawing.Size(388, 29)
         Me.panDetSysControls.TabIndex = 4
@@ -366,13 +353,16 @@ Partial Class frmMain
         '
         Me.panDetNet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.panDetNet.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.panDetNet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panDetNet.Controls.Add(Me.panDetNetPic)
         Me.panDetNet.Controls.Add(Me.panDetNetLink)
         Me.panDetNet.Controls.Add(Me.panDetNetCollapse)
         Me.panDetNet.Controls.Add(Me.panDetNetControls)
-        Me.panDetNet.Location = New System.Drawing.Point(3, 58)
+        Me.panDetNet.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panDetNet.Location = New System.Drawing.Point(8, 57)
+        Me.panDetNet.MinimumSize = New System.Drawing.Size(250, 2)
         Me.panDetNet.Name = "panDetNet"
-        Me.panDetNet.Size = New System.Drawing.Size(394, 49)
+        Me.panDetNet.Size = New System.Drawing.Size(390, 49)
         Me.panDetNet.TabIndex = 2
         '
         'panDetNetPic
@@ -407,21 +397,22 @@ Partial Class frmMain
         Me.panDetNetCollapse.BackColor = System.Drawing.Color.Transparent
         Me.panDetNetCollapse.BackgroundImage = Global.PearBox.My.Resources.Resources.ArrowUp
         Me.panDetNetCollapse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.panDetNetCollapse.Dock = System.Windows.Forms.DockStyle.Right
         Me.panDetNetCollapse.FlatAppearance.BorderSize = 0
         Me.panDetNetCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.panDetNetCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.panDetNetCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.panDetNetCollapse.Location = New System.Drawing.Point(368, 0)
+        Me.panDetNetCollapse.Location = New System.Drawing.Point(360, 0)
         Me.panDetNetCollapse.Name = "panDetNetCollapse"
-        Me.panDetNetCollapse.Size = New System.Drawing.Size(29, 19)
+        Me.panDetNetCollapse.Size = New System.Drawing.Size(28, 18)
         Me.panDetNetCollapse.TabIndex = 10
         Me.panDetNetCollapse.UseVisualStyleBackColor = False
         '
         'panDetNetControls
         '
         Me.panDetNetControls.BackColor = System.Drawing.SystemColors.Window
-        Me.panDetNetControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.panDetNetControls.Location = New System.Drawing.Point(3, 18)
+        Me.panDetNetControls.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.panDetNetControls.Location = New System.Drawing.Point(0, 18)
         Me.panDetNetControls.Name = "panDetNetControls"
         Me.panDetNetControls.Size = New System.Drawing.Size(388, 29)
         Me.panDetNetControls.TabIndex = 5
@@ -429,14 +420,17 @@ Partial Class frmMain
         'panDetBoot
         '
         Me.panDetBoot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.panDetBoot.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.panDetBoot.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.panDetBoot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panDetBoot.Controls.Add(Me.panDetBootPic)
         Me.panDetBoot.Controls.Add(Me.panDetBootLink)
         Me.panDetBoot.Controls.Add(Me.panDetBootCollapse)
         Me.panDetBoot.Controls.Add(Me.panDetBootControls)
-        Me.panDetBoot.Location = New System.Drawing.Point(3, 113)
+        Me.panDetBoot.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panDetBoot.Location = New System.Drawing.Point(8, 106)
+        Me.panDetBoot.MinimumSize = New System.Drawing.Size(250, 2)
         Me.panDetBoot.Name = "panDetBoot"
-        Me.panDetBoot.Size = New System.Drawing.Size(394, 49)
+        Me.panDetBoot.Size = New System.Drawing.Size(390, 49)
         Me.panDetBoot.TabIndex = 3
         '
         'panDetBootPic
@@ -470,21 +464,22 @@ Partial Class frmMain
         Me.panDetBootCollapse.BackColor = System.Drawing.Color.Transparent
         Me.panDetBootCollapse.BackgroundImage = Global.PearBox.My.Resources.Resources.ArrowUp
         Me.panDetBootCollapse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.panDetBootCollapse.Dock = System.Windows.Forms.DockStyle.Right
         Me.panDetBootCollapse.FlatAppearance.BorderSize = 0
         Me.panDetBootCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.panDetBootCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.panDetBootCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.panDetBootCollapse.Location = New System.Drawing.Point(368, 0)
+        Me.panDetBootCollapse.Location = New System.Drawing.Point(360, 0)
         Me.panDetBootCollapse.Name = "panDetBootCollapse"
-        Me.panDetBootCollapse.Size = New System.Drawing.Size(29, 19)
+        Me.panDetBootCollapse.Size = New System.Drawing.Size(28, 18)
         Me.panDetBootCollapse.TabIndex = 10
         Me.panDetBootCollapse.UseVisualStyleBackColor = False
         '
         'panDetBootControls
         '
         Me.panDetBootControls.BackColor = System.Drawing.SystemColors.Window
-        Me.panDetBootControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.panDetBootControls.Location = New System.Drawing.Point(3, 18)
+        Me.panDetBootControls.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.panDetBootControls.Location = New System.Drawing.Point(0, 18)
         Me.panDetBootControls.Name = "panDetBootControls"
         Me.panDetBootControls.Size = New System.Drawing.Size(388, 29)
         Me.panDetBootControls.TabIndex = 11
@@ -492,14 +487,17 @@ Partial Class frmMain
         'panDetKeys
         '
         Me.panDetKeys.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.panDetKeys.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.panDetKeys.BackColor = System.Drawing.SystemColors.InactiveBorder
+        Me.panDetKeys.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panDetKeys.Controls.Add(Me.panDetKeysPic)
         Me.panDetKeys.Controls.Add(Me.panDetKeysLink)
         Me.panDetKeys.Controls.Add(Me.panDetKeysCollapse)
         Me.panDetKeys.Controls.Add(Me.panDetKeysControls)
-        Me.panDetKeys.Location = New System.Drawing.Point(3, 168)
+        Me.panDetKeys.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panDetKeys.Location = New System.Drawing.Point(8, 155)
+        Me.panDetKeys.MinimumSize = New System.Drawing.Size(250, 2)
         Me.panDetKeys.Name = "panDetKeys"
-        Me.panDetKeys.Size = New System.Drawing.Size(394, 49)
+        Me.panDetKeys.Size = New System.Drawing.Size(390, 49)
         Me.panDetKeys.TabIndex = 2
         '
         'panDetKeysPic
@@ -533,21 +531,22 @@ Partial Class frmMain
         Me.panDetKeysCollapse.BackColor = System.Drawing.Color.Transparent
         Me.panDetKeysCollapse.BackgroundImage = Global.PearBox.My.Resources.Resources.ArrowUp
         Me.panDetKeysCollapse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.panDetKeysCollapse.Dock = System.Windows.Forms.DockStyle.Right
         Me.panDetKeysCollapse.FlatAppearance.BorderSize = 0
         Me.panDetKeysCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.panDetKeysCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.panDetKeysCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.panDetKeysCollapse.Location = New System.Drawing.Point(368, 0)
+        Me.panDetKeysCollapse.Location = New System.Drawing.Point(360, 0)
         Me.panDetKeysCollapse.Name = "panDetKeysCollapse"
-        Me.panDetKeysCollapse.Size = New System.Drawing.Size(29, 19)
+        Me.panDetKeysCollapse.Size = New System.Drawing.Size(28, 18)
         Me.panDetKeysCollapse.TabIndex = 9
         Me.panDetKeysCollapse.UseVisualStyleBackColor = False
         '
         'panDetKeysControls
         '
         Me.panDetKeysControls.BackColor = System.Drawing.SystemColors.Window
-        Me.panDetKeysControls.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.panDetKeysControls.Location = New System.Drawing.Point(3, 18)
+        Me.panDetKeysControls.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.panDetKeysControls.Location = New System.Drawing.Point(0, 18)
         Me.panDetKeysControls.Name = "panDetKeysControls"
         Me.panDetKeysControls.Size = New System.Drawing.Size(388, 29)
         Me.panDetKeysControls.TabIndex = 10
@@ -560,7 +559,7 @@ Partial Class frmMain
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(400, 351)
+        Me.Panel1.Size = New System.Drawing.Size(406, 309)
         Me.Panel1.TabIndex = 4
         '
         'panWelcomePic
@@ -604,30 +603,53 @@ Partial Class frmMain
         Me.Exporter.RestoreDirectory = True
         Me.Exporter.SupportMultiDottedExtensions = True
         '
-        'MenuItem1
+        'Panel2
         '
-        Me.MenuItem1.Index = 3
-        Me.MenuItem1.Text = "Debug window"
+        Me.Panel2.AutoScroll = True
+        Me.Panel2.Controls.Add(Me.Panel3)
+        Me.Panel2.Controls.Add(Me.Panel1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(253, 54)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(406, 309)
+        Me.Panel2.TabIndex = 4
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.panDetKeys)
+        Me.Panel3.Controls.Add(Me.panDetBoot)
+        Me.Panel3.Controls.Add(Me.panDetNet)
+        Me.Panel3.Controls.Add(Me.panDetSys)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(0, 0)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Padding = New System.Windows.Forms.Padding(8)
+        Me.Panel3.Size = New System.Drawing.Size(406, 309)
+        Me.Panel3.TabIndex = 4
+        '
+        'GuiltyPPC
+        '
+        Me.GuiltyPPC.Interval = 5000
+        '
+        'PPCSubProcess
+        '
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(659, 363)
+        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.lvVmlist)
-        Me.Controls.Add(Me.panMain)
         Me.Controls.Add(Me.tbAction)
         Me.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Menu = Me.MainMenu1
-        Me.MinimumSize = New System.Drawing.Size(270, 36)
+        Me.MinimumSize = New System.Drawing.Size(270, 38)
         Me.Name = "frmMain"
         Me.Text = "PearBox"
         Me.tbAction.ResumeLayout(False)
         Me.tbAction.PerformLayout()
-        Me.panMain.ResumeLayout(False)
-        Me.panMain.PerformLayout()
-        Me.panDetFlowContainer.ResumeLayout(False)
         Me.panDetSys.ResumeLayout(False)
         Me.panDetSys.PerformLayout()
         CType(Me.panDetSysPic, System.ComponentModel.ISupportInitialize).EndInit()
@@ -643,6 +665,8 @@ Partial Class frmMain
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.panWelcomePic, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -663,11 +687,8 @@ Partial Class frmMain
     Friend WithEvents mnuHelpAbout As System.Windows.Forms.MenuItem
     Friend WithEvents VMPics As System.Windows.Forms.ImageList
     Friend WithEvents panWelcomePic As System.Windows.Forms.PictureBox
-    Friend WithEvents lvVmlist As System.Windows.Forms.ListView
-    Friend WithEvents panMain As System.Windows.Forms.ScrollableControl
     Friend WithEvents panWelcomeTitle As System.Windows.Forms.Label
     Friend WithEvents panWelcomeDescription As System.Windows.Forms.Label
-    Friend WithEvents tbTestLabel As System.Windows.Forms.ToolStripLabel
     Friend WithEvents panDetSys As System.Windows.Forms.Panel
     Friend WithEvents panDetSysLink As System.Windows.Forms.LinkLabel
     Friend WithEvents panDetNet As System.Windows.Forms.Panel
@@ -684,7 +705,6 @@ Partial Class frmMain
     Friend WithEvents panDetNetCollapse As System.Windows.Forms.Button
     Friend WithEvents panDetBootCollapse As System.Windows.Forms.Button
     Friend WithEvents panDetKeysCollapse As System.Windows.Forms.Button
-    Friend WithEvents panDetFlowContainer As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents panDetSysControls As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents panDetNetControls As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents panDetBootControls As System.Windows.Forms.FlowLayoutPanel
@@ -699,5 +719,12 @@ Partial Class frmMain
     Friend WithEvents mnuMachineExport As System.Windows.Forms.MenuItem
     Friend WithEvents Exporter As System.Windows.Forms.SaveFileDialog
     Friend WithEvents HelpProvider1 As System.Windows.Forms.HelpProvider
+    Friend WithEvents mnuHelpDebugWnd As System.Windows.Forms.MenuItem
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents GuiltyPPC As System.Windows.Forms.Timer
+    Friend WithEvents lvVmlist As System.Windows.Forms.ListView
     Friend WithEvents MenuItem1 As System.Windows.Forms.MenuItem
+    Friend WithEvents mnuFileExit As System.Windows.Forms.MenuItem
+    Friend WithEvents PPCSubProcess As System.ComponentModel.BackgroundWorker
 End Class

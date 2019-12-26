@@ -1,30 +1,73 @@
 ﻿Imports System.IO.Path
+Imports System.Diagnostics.Process
 Public Class frmMain
-    Private Sub tbActionNew_Click(sender As System.Object, e As System.EventArgs) Handles tbActionNew.Click
-        frmNew.Show()
-    End Sub
+    Private Sub frmMain_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        If My.Settings.VMNames <> "" Then
+            Dim Names As String() = Split(My.Settings.VMNames, Chr(34))
+            Dim Paths As String() = Split(My.Settings.VMPaths, Chr(34))
+            Dim Icons As String() = Split(My.Settings.VMIcons, Chr(34))
 
-    Private Sub tbActionConfig_Click(sender As System.Object, e As System.EventArgs) Handles tbActionConfig.Click
-        frmSettings.Show()
-    End Sub
-
-    Private Sub tbDelete_Click(sender As System.Object, e As System.EventArgs) Handles tbDelete.Click
-        If lvVmlist.FocusedItem.Index <> -1 Then
-            'If frmMainDelete.ShowDialog = 
-            lvVmlist.FocusedItem.Remove()
-            If lvVmlist.Items.Count = 0 Then
-                tbDelete.Enabled = False
-            Else
-                With lvVmlist.Items.Item(lvVmlist.Items.Count - 1)
-                    .EnsureVisible()
-                    .Selected = True
+            For x As Integer = 0 To Names.Length - 2
+                With lvVmlist.Items.Add(Names(x))
+                    .ImageIndex = Icons(x)
+                    .SubItems.Add(Paths(x))
                 End With
-            End If
+            Next
         End If
+
+        If My.Settings.Locale = "" Then
+            My.Settings.Locale = My.Application.UICulture.Name
+        End If
+
+        Try
+            If My.Settings.DefaultNewMacPath = "" Then
+                'If Not My.Computer.FileSystem.DirectoryExists(My.Computer.FileSystem.SpecialDirectories.MyDocuments _
+                '& "\" & My.Settings.DefaultNewMacPath) Then
+                My.Computer.FileSystem.CreateDirectory( _
+                    My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & My.Resources.DefaultMacPath_en)
+                My.Settings.DefaultNewMacPath = My.Computer.FileSystem.SpecialDirectories.MyDocuments & "\" & My.Resources.DefaultMacPath_en
+                'End If
+            End If
+        Catch exc As Exception
+            MsgBox(exc.Message, MsgBoxStyle.Critical, Fortune)
+            MsgBox(My.Resources.frmMainErrorCreatingDefaultMacPath, MsgBoxStyle.Exclamation, Fortune)
+        End Try
+        Me.Location = My.Settings.LastLocation
+        Me.Size = My.Settings.LastSize
+        Me.WindowState = My.Settings.LastWindowState
     End Sub
 
-    Private Sub tbStart_Click(sender As System.Object, e As System.EventArgs) Handles tbStart.Click
-        StartPPC()
+    Private Sub frmMain_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        My.Settings.LastWindowState = Me.WindowState
+        If Not Me.WindowState = FormWindowState.Maximized Then
+            My.Settings.LastLocation = Me.Location
+            My.Settings.LastSize = Me.Size
+        End If
+
+        lvSaver()
+        My.Settings.Save()
+        'Fix for menus disappearing before the whole form
+        Me.Visible = False
+    End Sub
+
+    Private Sub frmMain_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
+        'panMain.Width = Me.ClientSize.Width - panMain.Left
+        'panMain.Height = Me.ClientSize.Height - panMain.Top
+    End Sub
+
+    Public Sub lvSaver()
+        My.Settings.VMNames = ""
+        My.Settings.VMIcons = ""
+        My.Settings.VMPaths = ""
+
+        If lvVmlist.Items.Count > 0 Then
+            For x As Integer = 0 To lvVmlist.Items.Count - 1
+                My.Settings.VMNames = My.Settings.VMNames & lvVmlist.Items.Item(x).Text & Chr(34)
+                My.Settings.VMIcons = My.Settings.VMIcons & lvVmlist.Items.Item(x).ImageIndex & Chr(34)
+                My.Settings.VMPaths = My.Settings.VMPaths & lvVmlist.Items.Item(x).SubItems.Item(1).Text & Chr(34)
+            Next
+        End If
+        My.Settings.Save()
     End Sub
 
     Private Sub mnuFilePrefs_Click(sender As System.Object, e As System.EventArgs) Handles mnuFilePrefs.Click
@@ -63,92 +106,68 @@ Public Class frmMain
         frmAbout.ShowDialog()
     End Sub
 
-    Private Sub MenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles MenuItem1.Click
+    Private Sub mnuHelpDebugWnd_Click(sender As System.Object, e As System.EventArgs) Handles mnuHelpDebugWnd.Click
         frmDebug.Show()
     End Sub
 
-    Private Sub frmMain_Load(sender As Object, e As System.EventArgs) Handles Me.Load
-        'You could use any VM* setting. All of them will have the same count
-        Dim Names As String() = Split(My.Settings.VMNames, Chr(34))
-        Dim Paths As String() = Split(My.Settings.VMPaths, Chr(34))
-        Dim Icons As String() = Split(My.Settings.VMIcons, Chr(34))
+    Private Sub tbNew_Click(sender As System.Object, e As System.EventArgs) Handles tbActionNew.Click
+        frmNew.Show()
+    End Sub
 
-        If Names.Length > 1 Then
-            For x As Integer = 0 To Names.Length - 1
-                With lvVmlist.Items.Add(Names(x))
-                    '.ImageIndex = Icons(x)
-                    .SubItems.Add(Paths(x))
+    Private Sub tbConfig_Click(sender As System.Object, e As System.EventArgs) Handles tbActionConfig.Click
+        frmSettings.FileName = lvVmlist.FocusedItem.SubItems.Item(1).Text
+        frmSettings.Show()
+    End Sub
+
+    Private Sub tbDelete_Click(sender As System.Object, e As System.EventArgs) Handles tbDelete.Click
+        If lvVmlist.FocusedItem.Index <> -1 Then
+            Select Case frmMainDelete.ShowDialog
+                Case Windows.Forms.DialogResult.Yes
+                    Try
+                        My.Computer.FileSystem.DeleteDirectory( _
+                            System.IO.Path.GetDirectoryName(lvVmlist.FocusedItem.SubItems.Item(1).Text), _
+                              FileIO.UIOption.OnlyErrorDialogs, _
+                              FileIO.RecycleOption.DeletePermanently, FileIO.UICancelOption.DoNothing)
+                        lvVmlist.FocusedItem.Remove()
+                    Catch ex As Exception
+                        MsgBox(ex.Message, MsgBoxStyle.Exclamation, Fortune)
+                    End Try
+                Case Windows.Forms.DialogResult.No
+                    lvVmlist.FocusedItem.Remove()
+            End Select
+
+            If lvVmlist.Items.Count = 0 Then
+                QuickButtons(False)
+            Else
+                With lvVmlist.Items.Item(lvVmlist.Items.Count - 1)
+                    .EnsureVisible()
+                    .Selected = True
                 End With
-            Next
+            End If
         End If
-
-        If My.Settings.DefaultNewMacPath = "" Then
-            MsgBox("The default Mac path is not set. Please set it before trying to create a new Mac.", MsgBoxStyle.Exclamation, Fortune)
-        End If
-        Me.Location = My.Settings.LastLocation
-        Me.Size = My.Settings.LastSize
-        Me.WindowState = My.Settings.LastWindowState
     End Sub
 
-    Private Sub frmMain_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If lvVmlist.Items.Count > 0 Then
-            For x As Integer = 0 To lvVmlist.Items.Count - 1
-                My.Settings.VMIcons = My.Settings.VMIcons & lvVmlist.Items.Item(x).ImageIndex & Chr(34)
-                MsgBox(My.Settings.VMIcons & lvVmlist.Items.Item(x).ImageIndex & Chr(34))
-                My.Settings.VMNames = My.Settings.VMNames & lvVmlist.Items.Item(x).Text & Chr(34)
-                My.Settings.VMPaths = My.Settings.VMPaths & lvVmlist.Items.Item(x).SubItems.Item(1).Text & Chr(34)
-            Next
-        End If
-
-        My.Settings.LastWindowState = Me.WindowState
-        If Not Me.WindowState = FormWindowState.Maximized Then
-            My.Settings.LastLocation = Me.Location
-            My.Settings.LastSize = Me.Size
-        End If
-        My.Settings.Save()
-        'Fix for menus disappearing before the whole form
-        Me.Visible = False
+    Private Sub tbStart_Click(sender As System.Object, e As System.EventArgs) Handles tbStart.Click
+        PPCSubProcess.RunWorkerAsync(lvVmlist.FocusedItem.SubItems.Item(1).Text)
     End Sub
 
-    Private Sub frmMain_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
-        panMain.Width = Me.ClientSize.Width - panMain.Left
-        panMain.Height = Me.ClientSize.Height - panMain.Top
-    End Sub
-
-    Private Sub panDetCollapse_Click(sender As Button, e As System.EventArgs) Handles panDetSysCollapse.Click, panDetKeysCollapse.Click, panDetBootCollapse.Click, panDetNetCollapse.Click
+    Private Sub panDetCollapse_Click(sender As Button, e As System.EventArgs) _
+        Handles panDetSysCollapse.Click, panDetKeysCollapse.Click, panDetBootCollapse.Click, panDetNetCollapse.Click
         Dim ParentPanel As Panel = sender.Parent
         Dim SubPanel As Panel = ParentPanel.Controls.Item(3)
-        If ParentPanel.Height > SubPanel.Height Then
-            ParentPanel.Height = ParentPanel.Height - SubPanel.Height
+        If ParentPanel.Height > 20 Then
+            ParentPanel.Height = ParentPanel.Height - 29
+            SubPanel.Height = 0
             SubPanel.Enabled = False
             sender.BackgroundImage = My.Resources.ArrowDown
         Else
-            ParentPanel.Height = ParentPanel.Height + SubPanel.Height
+            ParentPanel.Height = ParentPanel.Height + 29
             SubPanel.Enabled = True
+            SubPanel.Height = 29
             sender.BackgroundImage = My.Resources.ArrowUp
         End If
     End Sub
-
-    Private Sub panDetail_Resize(sender As Object, e As System.EventArgs) Handles panMain.Resize
-        panMain.Refresh()
-        If Not panMain.Width <= panWelcomeTitle.Width + panWelcomePic.Width Then
-            panWelcomePic.Left = panMain.Width - panWelcomePic.Width - 10
-            panWelcomeDescription.Width = panMain.Width - panWelcomePic.Width - 9
-        End If
-    End Sub
-
-    Private Sub panDetFlowContainer_Resize(sender As FlowLayoutPanel, e As System.EventArgs) Handles panDetFlowContainer.Resize
-        For x As Integer = 0 To sender.Controls.Count - 1
-            sender.Controls.Item(x).Width = sender.Width - 15
-            If sender.Controls.Item(x).Controls.Count > 3 Then
-                sender.Controls.Item(x).Controls.Item(3).Width = sender.Controls.Item(x).Width - 7
-                sender.Controls.Item(x).Controls.Item(2).Left = _
-                    sender.Controls.Item(x).Width - _
-                    sender.Controls.Item(x).Controls.Item(2).Width
-            End If
-        Next
-    End Sub
-
+    
     Private Sub lvVmlist_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvVmlist.SelectedIndexChanged
         If IsNothing(lvVmlist.FocusedItem) = True Then
             QuickButtons(False)
@@ -157,11 +176,13 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub Link_MouseEnter(sender As Object, e As System.EventArgs) Handles panDetSysLink.MouseEnter, panDetKeysLink.MouseEnter, panDetBootLink.MouseEnter, panDetNetLink.MouseEnter
+    Private Sub Link_MouseEnter(sender As Object, e As System.EventArgs) _
+        Handles panDetSysLink.MouseEnter, panDetKeysLink.MouseEnter, panDetBootLink.MouseEnter, panDetNetLink.MouseEnter
         sender.LinkColor = Color.Blue
     End Sub
 
-    Private Sub Link_MouseLeave(sender As Object, e As System.EventArgs) Handles panDetSysLink.MouseLeave, panDetKeysLink.MouseLeave, panDetBootLink.MouseLeave, panDetNetLink.MouseLeave
+    Private Sub Link_MouseLeave(sender As Object, e As System.EventArgs) _
+        Handles panDetSysLink.MouseLeave, panDetKeysLink.MouseLeave, panDetBootLink.MouseLeave, panDetNetLink.MouseLeave
         sender.LinkColor = Color.Black
     End Sub
 
@@ -280,7 +301,15 @@ Public Class frmMain
         Return assemblyName
     End Function
 
-    Private Sub StartPPC()
+    Private Sub mnuFileExit_Click(sender As System.Object, e As System.EventArgs) Handles mnuFileExit.Click
+        Me.Close()
+    End Sub
 
+    Private Sub PPCSubProcess_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles PPCSubProcess.DoWork
+        StartPPC.Start(e.Argument.ToString)
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs)
+        frmStdOut.Show()
     End Sub
 End Class

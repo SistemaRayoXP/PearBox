@@ -151,11 +151,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Busca una cadena traducida similar a My Macs.
+        '''</summary>
+        Friend ReadOnly Property DefaultMacPath_en() As String
+            Get
+                Return ResourceManager.GetString("DefaultMacPath_en", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca una cadena traducida similar a There was an error while creating the default Mac folder. Change the default folder in preferences..
+        '''</summary>
+        Friend ReadOnly Property frmMainErrorCreatingDefaultMacPath() As String
+            Get
+                Return ResourceManager.GetString("frmMainErrorCreatingDefaultMacPath", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca una cadena traducida similar a The specified name is already in use. Please specify another name.
+        '''</summary>
+        Friend ReadOnly Property frmNewAlreadyExists_en() As String
+            Get
+                Return ResourceManager.GetString("frmNewAlreadyExists_en", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Generic() As System.Drawing.Bitmap
+        Friend ReadOnly Property GenericMacOS() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Generic", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("GenericMacOS", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
