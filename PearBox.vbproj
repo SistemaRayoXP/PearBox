@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{591E0D13-2EDD-44DF-B966-755CBDCEC99D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>PearBox.My.MyApplication</StartupObject>
+    <RootNamespace>PearBox</RootNamespace>
+    <AssemblyName>PearBox</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>PearBox.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>PearBox.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\JamieIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Debug\</OutputPath>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\Release\</OutputPath>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmAbout.Designer.vb">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDebug.vb" />
+    <Compile Include="frmDisk.Designer.vb">
+      <DependentUpon>frmDisk.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDisk.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainDelete.Designer.vb">
+      <DependentUpon>frmMainDelete.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainDelete.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNew.Designer.vb">
+      <DependentUpon>frmNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrefs.Designer.vb">
+      <DependentUpon>frmPrefs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrefs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.designer.vb">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStdOut.Designer.vb">
+      <DependentUpon>frmStdOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmStdOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageMaker.Designer.vb">
+      <DependentUpon>ImageMaker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImageMaker.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MacMaker.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="StartPPC.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDisk.resx">
+      <DependentUpon>frmDisk.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainDelete.resx">
+      <DependentUpon>frmMainDelete.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNew.resx">
+      <DependentUpon>frmNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrefs.resx">
+      <DependentUpon>frmPrefs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStdOut.resx">
+      <DependentUpon>frmStdOut.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageMaker.resx">
+      <DependentUpon>ImageMaker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\144Blank.img" />
+    <None Include="Resources\144Boot68K70.img" />
+    <None Include="Resources\144BootPPC85.img" />
+    <None Include="Resources\Buttons\ArrowDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackgroundImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mnuHelpAbout.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WizardImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\BootPanelToggle.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\Image3.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\Image4.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\Image5.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\Image6.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\Image7.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\Image9.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\mnuMachineAdd.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\mnuMachineNew.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\ToolConfig.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\ToolDelete.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\ToolNew.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\ToolStart.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buttons\ArrowUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designs\Cheetah.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designs\Generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designs\Linux.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designs\Other.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designs\Panther.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Designs\Tiger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\JamieIcon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
